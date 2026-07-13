@@ -3,7 +3,9 @@ export interface PersonalInfo {
   name: string
   title: string
   intro: string
-  resumeUrl: string
+  location: string
+  availability: string
+  resumeUrl?: string
   socialLinks: {
     github: string
     email: string
@@ -12,11 +14,12 @@ export interface PersonalInfo {
 }
 
 export const personalInfo: PersonalInfo = {
-  name: 'ET ANCHHY',
-  title: 'Web Developer',
+  name: 'Et Anchhy',
+  title: 'Full-Stack Web Developer',
   intro:
-    'Year 4 Information & Communication Engineering student passionate about building modern web applications with Vue.js and NestJS.',
-  resumeUrl: '#',
+    'I build thoughtful, reliable web experiences—from responsive Vue interfaces to secure NestJS and Spring Boot APIs.',
+  location: 'Phnom Penh, Cambodia',
+  availability: 'Open to internship opportunities',
   socialLinks: {
     github: 'https://github.com/Anchhy',
     email: 'etanchhy@gmail.com',
@@ -26,18 +29,18 @@ export const personalInfo: PersonalInfo = {
 
 // ────────── About ──────────
 export const aboutPoints: string[] = [
-  'Highly motivated Year 4 Information & Communication Engineering student.',
-  'Strong foundation in software engineering and problem solving.',
-  'Interested in Full Stack Development using Vue.js and NestJS.',
-  'Looking for Web Development Internship opportunities.',
+  'Year 4 Information & Communication Engineering student at ITC.',
+  'Comfortable working across frontend, backend, and relational databases.',
+  'Experienced in collaborative projects, Git workflows, and API integration.',
+  'Currently looking for a web development internship where I can learn and contribute.',
 ]
 
 // ────────── Typing Effect Titles ──────────
 export const typingTitles: string[] = [
-  'Web Developer',
-  'Vue.js Enthusiast',
-  'Full Stack Developer',
-  'NestJS Backend Developer',
+  'Vue.js interfaces',
+  'NestJS APIs',
+  'Spring Boot systems',
+  'Full-stack products',
 ]
 
 // ────────── Skills ──────────
@@ -105,7 +108,9 @@ export const skillCategories: SkillCategory[] = [
 // ────────── Projects ──────────
 export interface Project {
   title: string
+  eyebrow: string
   description: string
+  contribution: string
   features: string[]
   techStack: string[]
   githubUrl?: string
@@ -120,8 +125,11 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: 'NearMe Social',
+    eyebrow: 'Social platform',
     description:
       'Location-based social platform designed for secure nearby discovery and community interaction.',
+    contribution:
+      'Built notification backend architecture and core social interfaces, including private chat, posts, discussions, and moderation tools.',
     features: [
       'Notification backend architecture',
       'REST APIs',
@@ -139,8 +147,11 @@ export const projects: Project[] = [
   },
   {
     title: 'Course Enrollment & Scheduling',
+    eyebrow: 'Academic system',
     description:
       'Course enrollment and classroom scheduling system built with Spring Boot, featuring secure authentication, database migrations, and collaborative team workflow.',
+    contribution:
+      'Collaborated in a five-person team on secure enrollment workflows, database migrations, and server-rendered interfaces.',
     features: [
       'Spring Security authentication',
       'Flyway database migrations',
@@ -157,8 +168,11 @@ export const projects: Project[] = [
   },
   {
     title: 'Library Management System',
+    eyebrow: 'Java application',
     description:
       'Java OOP console application for managing book borrowing and returning with Admin and General User roles, using CSV-based data persistence.',
+    contribution:
+      'Applied object-oriented design to role-based book, user, and transaction management with persistent CSV storage.',
     features: [
       'Admin & User role system',
       'Browse books by category',

@@ -1,165 +1,82 @@
 <script setup lang="ts">
 import { projects } from '../data/portfolio'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
-import { Github, ExternalLink, CheckCircle2, Users } from 'lucide-vue-next'
+import { Github, ExternalLink, ArrowUpRight, Users } from 'lucide-vue-next'
 
 const { elementRef } = useScrollAnimation()
 
-// Alternate gradient colors for project cards
 const gradients = [
-  'linear-gradient(135deg, var(--color-primary-500), var(--color-accent-600))',
-  'linear-gradient(135deg, #059669, #0891b2)',
-  'linear-gradient(135deg, #d97706, #dc2626)',
+  'linear-gradient(135deg, #4f46e5, #7c3aed)',
+  'linear-gradient(135deg, #0f766e, #0891b2)',
+  'linear-gradient(135deg, #b45309, #e11d48)',
 ]
 </script>
 
 <template>
-  <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8">
-    <div ref="elementRef" class="reveal max-w-6xl mx-auto">
-      <h2 class="section-title">
-        Featured <span class="gradient-text">Projects</span>
-      </h2>
-      <p class="section-subtitle">Highlights of my recent work</p>
+  <section id="projects" class="section-shell">
+    <div ref="elementRef" class="reveal mx-auto max-w-7xl">
+      <div class="section-heading-row">
+        <div>
+          <p class="section-kicker">Selected work</p>
+          <h2 class="section-title text-left">Projects with <span class="gradient-text">purpose</span></h2>
+        </div>
+        <p class="section-copy">
+          Products that helped me practice full-stack architecture, teamwork, and solving real workflow problems.
+        </p>
+      </div>
 
-      <div class="space-y-10 max-w-4xl mx-auto">
-        <div v-for="(project, idx) in projects" :key="project.title">
-          <div class="card overflow-hidden">
-            <!-- Project Header with gradient banner -->
-            <div
-              class="relative h-48 sm:h-56 flex items-center justify-center"
-              :style="{ background: gradients[idx % gradients.length] }"
-            >
-              <div class="text-center text-white px-6">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl font-black mb-2">{{ project.title }}</h3>
-                <!-- Badges row -->
-                <div class="flex items-center justify-center gap-2 flex-wrap mb-3">
-                  <span
-                    v-if="project.isGroupProject"
-                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-white/20 backdrop-blur-sm"
-                  >
-                    👥 Group Project
-                  </span>
-                  <span
-                    v-if="project.teamInfo"
-                    class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-white/15 backdrop-blur-sm"
-                  >
-                    {{ project.teamInfo }}
-                  </span>
-                </div>
-                <p class="text-white/80 text-sm sm:text-base max-w-lg mx-auto">
-                  {{ project.description }}
-                </p>
-              </div>
-              <!-- Decorative circles -->
-              <div
-                class="absolute top-4 left-4 w-20 h-20 rounded-full border-2 border-white/10"
-              ></div>
-              <div
-                class="absolute bottom-4 right-4 w-32 h-32 rounded-full border-2 border-white/10"
-              ></div>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <article
+          v-for="(project, idx) in projects"
+          :key="project.title"
+          class="project-card group"
+          :class="{ 'lg:col-span-2 lg:grid lg:grid-cols-[0.85fr_1.15fr]': idx === 0 }"
+        >
+          <div class="project-visual" :style="{ background: gradients[idx % gradients.length] }">
+            <span class="project-number">0{{ idx + 1 }}</span>
+            <div class="relative z-10">
+              <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-white/70">{{ project.eyebrow }}</p>
+              <h3 class="max-w-lg text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl">
+                {{ project.title }}
+              </h3>
+            </div>
+            <div class="project-orb project-orb-one"></div>
+            <div class="project-orb project-orb-two"></div>
+          </div>
+
+          <div class="flex flex-col p-6 sm:p-8">
+            <div class="mb-5 flex flex-wrap items-center gap-2">
+              <span v-if="project.isGroupProject" class="meta-chip"><Users :size="13" /> Team project</span>
+              <span v-if="project.teamInfo" class="meta-chip">{{ project.teamInfo }}</span>
             </div>
 
-            <!-- Project Body -->
-            <div class="p-6 sm:p-8">
-              <!-- Tech Stack Badges -->
-              <div class="mb-6">
-                <h4
-                  class="text-xs font-bold uppercase tracking-widest mb-3"
-                  style="color: var(--text-secondary)"
-                >
-                  Technology Stack
-                </h4>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    v-for="tech in project.techStack"
-                    :key="tech"
-                    class="px-3 py-1.5 rounded-lg text-xs font-semibold"
-                    style="
-                      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
-                      color: var(--color-primary-500);
-                      border: 1px solid rgba(99,102,241,0.2);
-                    "
-                  >
-                    {{ tech }}
-                  </span>
-                </div>
-              </div>
+            <p class="mb-5 leading-7" style="color: var(--text-secondary)">{{ project.description }}</p>
 
-              <!-- Features -->
-              <div class="mb-6">
-                <h4
-                  class="text-xs font-bold uppercase tracking-widest mb-3"
-                  style="color: var(--text-secondary)"
-                >
-                  Key Features
-                </h4>
-                <div class="grid sm:grid-cols-2 gap-2">
-                  <div
-                    v-for="feature in project.features"
-                    :key="feature"
-                    class="flex items-center gap-2.5 py-2 px-3 rounded-lg text-sm"
-                    style="color: var(--text-primary)"
-                  >
-                    <CheckCircle2
-                      :size="16"
-                      class="flex-shrink-0"
-                      style="color: var(--color-primary-500)"
-                    />
-                    {{ feature }}
-                  </div>
-                </div>
-              </div>
+            <div class="contribution-block mb-6">
+              <p class="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary-500)]">My contribution</p>
+              <p class="text-sm leading-6" style="color: var(--text-primary)">{{ project.contribution }}</p>
+            </div>
 
-              <!-- Actions — dynamic based on project URLs -->
-              <div class="flex flex-wrap gap-3 pt-2">
-                <!-- Single repo button -->
-                <a
-                  v-if="project.githubUrl"
-                  :href="project.githubUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-primary text-sm"
-                >
-                  <Github :size="16" />
-                  View on GitHub
-                </a>
-                <!-- Multi-repo: Backend -->
-                <a
-                  v-if="project.githubBackendUrl"
-                  :href="project.githubBackendUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-primary text-sm"
-                >
-                  <Github :size="16" />
-                  Backend Repo
-                </a>
-                <!-- Multi-repo: Frontend -->
-                <a
-                  v-if="project.githubFrontendUrl"
-                  :href="project.githubFrontendUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-outline text-sm"
-                >
-                  <Github :size="16" />
-                  Frontend Repo
-                </a>
-                <!-- Live Demo -->
-                <a
-                  v-if="project.liveUrl"
-                  :href="project.liveUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-outline text-sm"
-                >
-                  <ExternalLink :size="16" />
-                  Live Demo
-                </a>
-              </div>
+            <div class="mb-7 flex flex-wrap gap-2">
+              <span v-for="tech in project.techStack" :key="tech" class="tech-chip">{{ tech }}</span>
+            </div>
+
+            <div class="mt-auto flex flex-wrap gap-4 border-t pt-5" style="border-color: var(--border)">
+              <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                <ExternalLink :size="16" /> Live demo <ArrowUpRight :size="14" />
+              </a>
+              <a v-if="project.githubUrl" :href="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                <Github :size="16" /> Source code <ArrowUpRight :size="14" />
+              </a>
+              <a v-if="project.githubBackendUrl" :href="project.githubBackendUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                <Github :size="16" /> Backend <ArrowUpRight :size="14" />
+              </a>
+              <a v-if="project.githubFrontendUrl" :href="project.githubFrontendUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                <Github :size="16" /> Frontend <ArrowUpRight :size="14" />
+              </a>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>

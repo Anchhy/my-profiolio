@@ -19,10 +19,10 @@ const currentYear = new Date().getFullYear()
         <!-- Brand -->
         <div>
           <a href="#hero" class="text-xl font-bold gradient-text" @click.prevent="scrollToTop">
-            &lt;EA /&gt;
+            Et Anchhy
           </a>
           <p class="mt-3 text-sm leading-relaxed" style="color: var(--text-secondary)">
-            Year 4 ICE student passionate about building modern web applications.
+            Full-stack developer and Year 4 ICE student based in Phnom Penh.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ const currentYear = new Date().getFullYear()
       <!-- Bottom Row -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <p class="text-xs flex items-center gap-1" style="color: var(--text-secondary)">
-          &copy; {{ currentYear }} ET ANCHHY. Made with
+          &copy; {{ currentYear }} Et Anchhy. Made with
           <Heart :size="12" style="color: var(--color-primary-500)" />
           using Vue.js
         </p>

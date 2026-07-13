@@ -43,12 +43,19 @@ const scrollTo = (href: string) => {
   }
 }
 
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape') isMobileMenuOpen.value = false
+}
+
 onMounted(() => {
+  handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('keydown', handleKeydown)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('keydown', handleKeydown)
 })
 </script>
 
@@ -62,10 +69,12 @@ onUnmounted(() => {
       <!-- Logo -->
       <a
         href="#hero"
-        class="text-xl font-bold tracking-tight gradient-text"
+        class="flex items-center gap-2 text-base font-extrabold tracking-tight"
         @click.prevent="scrollTo('#hero')"
+        aria-label="Et Anchhy — Home"
       >
-        &lt;EA /&gt;
+        <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-xs text-white shadow-lg shadow-indigo-500/20">EA</span>
+        <span>Et Anchhy</span>
       </a>
 
       <!-- Desktop Nav Links -->
@@ -81,6 +90,7 @@ onUnmounted(() => {
               : 'hover:text-[var(--color-primary-500)]'
           "
           :style="{ color: activeSection !== link.href.slice(1) ? 'var(--text-secondary)' : undefined }"
+          :aria-current="activeSection === link.href.slice(1) ? 'page' : undefined"
           @click.prevent="scrollTo(link.href)"
         >
           {{ link.label }}
@@ -95,6 +105,7 @@ onUnmounted(() => {
           class="p-2 rounded-lg transition-colors duration-200 cursor-pointer"
           style="color: var(--text-secondary); background: transparent"
           aria-label="Toggle dark mode"
+          :title="isDark ? 'Use light theme' : 'Use dark theme'"
         >
           <Transition name="icon" mode="out-in">
             <Moon v-if="!isDark" :size="20" />
@@ -109,6 +120,8 @@ onUnmounted(() => {
           style="color: var(--text-secondary)"
           @click="isMobileMenuOpen = !isMobileMenuOpen"
           aria-label="Toggle mobile menu"
+          :aria-expanded="isMobileMenuOpen"
+          aria-controls="mobile-navigation"
         >
           <Transition name="icon" mode="out-in">
             <X v-if="isMobileMenuOpen" :size="22" />
@@ -120,7 +133,7 @@ onUnmounted(() => {
 
     <!-- Mobile Menu Drawer -->
     <Transition name="slide-down">
-      <div v-if="isMobileMenuOpen" class="md:hidden glass mt-2 mx-4 rounded-xl overflow-hidden">
+      <div v-if="isMobileMenuOpen" id="mobile-navigation" class="md:hidden glass mt-2 mx-4 rounded-xl overflow-hidden shadow-xl">
         <div class="py-3 px-2">
           <a
             v-for="link in navLinks"
