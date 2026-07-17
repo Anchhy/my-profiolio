@@ -17,7 +17,7 @@ export const personalInfo: PersonalInfo = {
   name: 'Et Anchhy',
   title: 'Full-Stack Web Developer',
   intro:
-    'I build thoughtful, reliable web experiences—from responsive Vue interfaces to secure NestJS and Spring Boot APIs.',
+    'I turn product ideas into clear interfaces and dependable APIs using Vue, NestJS, and Spring Boot.',
   location: 'Phnom Penh, Cambodia',
   availability: 'Open to internship opportunities',
   socialLinks: {
@@ -33,14 +33,6 @@ export const aboutPoints: string[] = [
   'Comfortable working across frontend, backend, and relational databases.',
   'Experienced in collaborative projects, Git workflows, and API integration.',
   'Currently looking for a web development internship where I can learn and contribute.',
-]
-
-// ────────── Typing Effect Titles ──────────
-export const typingTitles: string[] = [
-  'Vue.js interfaces',
-  'NestJS APIs',
-  'Spring Boot systems',
-  'Full-stack products',
 ]
 
 // ────────── Skills ──────────
@@ -109,6 +101,7 @@ export const skillCategories: SkillCategory[] = [
 export interface Project {
   title: string
   eyebrow: string
+  category: 'Full stack' | 'Backend' | 'Java'
   description: string
   contribution: string
   features: string[]
@@ -126,6 +119,7 @@ export const projects: Project[] = [
   {
     title: 'NearMe Social',
     eyebrow: 'Social platform',
+    category: 'Full stack',
     description:
       'Location-based social platform designed for secure nearby discovery and community interaction.',
     contribution:
@@ -148,6 +142,7 @@ export const projects: Project[] = [
   {
     title: 'Course Enrollment & Scheduling',
     eyebrow: 'Academic system',
+    category: 'Backend',
     description:
       'Course enrollment and classroom scheduling system built with Spring Boot, featuring secure authentication, database migrations, and collaborative team workflow.',
     contribution:
@@ -169,6 +164,7 @@ export const projects: Project[] = [
   {
     title: 'Library Management System',
     eyebrow: 'Java application',
+    category: 'Java',
     description:
       'Java OOP console application for managing book borrowing and returning with Admin and General User roles, using CSV-based data persistence.',
     contribution:
@@ -209,47 +205,3 @@ export const education: Education[] = [
       'Studying core engineering concepts including software development, networking, and system design with a focus on web technologies.',
   },
 ]
-
-// ────────── Particles Config ──────────
-export const particlesOptions = {
-  fullScreen: { enable: false },
-  background: { color: { value: 'transparent' } },
-  fpsLimit: 60,
-  particles: {
-    number: {
-      value: 60,
-      density: { enable: true, width: 1920, height: 1080 },
-    },
-    color: { value: '#6366f1' },
-    shape: { type: 'circle' },
-    opacity: {
-      value: { min: 0.1, max: 0.4 },
-      animation: { enable: true, speed: 0.8, sync: false },
-    },
-    size: {
-      value: { min: 1, max: 3 },
-    },
-    links: {
-      enable: true,
-      distance: 150,
-      color: '#6366f1',
-      opacity: 0.15,
-      width: 1,
-    },
-    move: {
-      enable: true,
-      speed: 1,
-      direction: 'none' as const,
-      outModes: { default: 'bounce' as const },
-    },
-  },
-  interactivity: {
-    events: {
-      onHover: { enable: true, mode: 'grab' },
-    },
-    modes: {
-      grab: { distance: 140, links: { opacity: 0.3 } },
-    },
-  },
-  detectRetina: true,
-}

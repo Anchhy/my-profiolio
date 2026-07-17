@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
+import { ArrowUpRight, Check, Copy, Github, Mail, MapPin, Phone, Send } from 'lucide-vue-next'
 import { personalInfo } from '../data/portfolio'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
-import { ArrowUpRight, Check, Copy, Github, Mail, MapPin, Phone } from 'lucide-vue-next'
 
 const { elementRef } = useScrollAnimation()
 const copied = ref(false)
+const statusMessage = ref('')
+const form = reactive({ name: '', email: '', message: '' })
 
 const copyEmail = async () => {
   try {
@@ -17,68 +19,70 @@ const copyEmail = async () => {
   }
 }
 
-const contactLinks = [
-  {
-    icon: Github,
-    label: 'GitHub',
-    value: '@Anchhy',
-    href: personalInfo.socialLinks.github,
-  },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: personalInfo.socialLinks.phone,
-    href: `tel:${personalInfo.socialLinks.phone.replace(/\s/g, '')}`,
-  },
-]
+const submitContact = () => {
+  const subject = encodeURIComponent(`Portfolio enquiry from ${form.name}`)
+  const body = encodeURIComponent(`Hi Anchhy,\n\n${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`)
+  statusMessage.value = 'Opening your email application…'
+  window.location.href = `mailto:${personalInfo.socialLinks.email}?subject=${subject}&body=${body}`
+}
 </script>
 
 <template>
-  <section id="contact" class="section-shell">
+  <section id="contact" class="section-shell contact-section">
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="contact-panel">
-        <div class="relative z-10 max-w-3xl">
-          <p class="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-white/65">Let’s work together</p>
-          <h2 class="text-4xl font-black leading-tight tracking-[-0.04em] text-white sm:text-5xl md:text-6xl">
-            Have a role, project, or idea in mind?
-          </h2>
-          <p class="mt-5 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-            I’m currently open to web development internships and collaborations. The easiest way to reach me is by email.
+        <div class="contact-intro">
+          <p class="contact-kicker">05 / Let’s connect</p>
+          <h2>Have a role or project in mind?</h2>
+          <p>
+            I’m open to web development internships and thoughtful collaborations. Tell me what you’re building or where I could contribute.
           </p>
 
-          <div class="mt-9 flex flex-wrap gap-3">
-            <a :href="`mailto:${personalInfo.socialLinks.email}`" class="contact-primary">
-              <Mail :size="18" /> Send me an email <ArrowUpRight :size="16" />
+          <div class="contact-details">
+            <div>
+              <Mail :size="18" />
+              <span><small>Email</small><a :href="`mailto:${personalInfo.socialLinks.email}`">{{ personalInfo.socialLinks.email }}</a></span>
+              <button type="button" :aria-label="copied ? 'Email copied' : 'Copy email address'" @click="copyEmail">
+                <Check v-if="copied" :size="16" /><Copy v-else :size="16" />
+              </button>
+            </div>
+            <a :href="personalInfo.socialLinks.github" target="_blank" rel="noopener noreferrer">
+              <Github :size="18" /><span><small>GitHub</small>@Anchhy</span><ArrowUpRight :size="15" />
             </a>
-            <button class="contact-secondary" @click="copyEmail">
-              <Check v-if="copied" :size="18" />
-              <Copy v-else :size="18" />
-              {{ copied ? 'Email copied' : 'Copy email' }}
-            </button>
+            <a :href="`tel:${personalInfo.socialLinks.phone.replace(/\s/g, '')}`">
+              <Phone :size="18" /><span><small>Phone</small>{{ personalInfo.socialLinks.phone }}</span>
+            </a>
+            <div>
+              <MapPin :size="18" /><span><small>Location</small>{{ personalInfo.location }}</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-10 mt-14 grid gap-3 border-t border-white/15 pt-7 sm:grid-cols-3">
-          <a
-            v-for="item in contactLinks"
-            :key="item.label"
-            :href="item.href"
-            :target="item.label === 'GitHub' ? '_blank' : undefined"
-            rel="noopener noreferrer"
-            class="contact-detail group"
-          >
-            <component :is="item.icon" :size="18" />
-            <span><small>{{ item.label }}</small>{{ item.value }}</span>
-            <ArrowUpRight :size="15" class="ml-auto opacity-50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </a>
-          <div class="contact-detail">
-            <MapPin :size="18" />
-            <span><small>Location</small>{{ personalInfo.location }}</span>
+        <form class="contact-form" @submit.prevent="submitContact">
+          <div class="form-heading">
+            <div>
+              <span>Send a message</span>
+              <small>This opens your email app</small>
+            </div>
+            <Send :size="20" />
           </div>
-        </div>
 
-        <div class="contact-orb contact-orb-one" aria-hidden="true"></div>
-        <div class="contact-orb contact-orb-two" aria-hidden="true"></div>
+          <label>
+            Your name
+            <input v-model.trim="form.name" type="text" name="name" autocomplete="name" placeholder="Jane Smith" required />
+          </label>
+          <label>
+            Email address
+            <input v-model.trim="form.email" type="email" name="email" autocomplete="email" placeholder="jane@company.com" required />
+          </label>
+          <label>
+            Message
+            <textarea v-model.trim="form.message" name="message" rows="5" placeholder="Tell me a little about the opportunity…" required></textarea>
+          </label>
+
+          <button type="submit" class="contact-submit">Prepare email <ArrowUpRight :size="16" /></button>
+          <p class="form-status" aria-live="polite">{{ statusMessage }}</p>
+        </form>
       </div>
     </div>
   </section>

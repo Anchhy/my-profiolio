@@ -12,8 +12,8 @@ import ContactSection from '../components/ContactSection.vue'
   <DefaultLayout>
     <HeroSection />
     <AboutSection />
-    <SkillsSection />
     <ProjectsSection />
+    <SkillsSection />
     <EducationSection />
     <ContactSection />
   </DefaultLayout>

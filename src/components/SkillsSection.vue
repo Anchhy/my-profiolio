@@ -1,54 +1,35 @@
 <script setup lang="ts">
+import { Database, Monitor, Server, Wrench } from 'lucide-vue-next'
 import { skillCategories } from '../data/portfolio'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
-import { Monitor, Server, Database, Wrench, ArrowUpRight } from 'lucide-vue-next'
 
 const { elementRef } = useScrollAnimation()
-
-const iconMap: Record<string, any> = {
-  monitor: Monitor,
-  server: Server,
-  database: Database,
-  wrench: Wrench,
-}
+const iconMap: Record<string, typeof Monitor> = { monitor: Monitor, server: Server, database: Database, wrench: Wrench }
 </script>
 
 <template>
-  <section id="skills" class="section-shell section-tint">
+  <section id="skills" class="section-shell">
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="section-heading-row">
         <div>
-          <p class="section-kicker">Toolkit</p>
-          <h2 class="section-title text-left">Tools I use to <span class="gradient-text">ship ideas</span></h2>
+          <p class="section-kicker">03 / Capabilities</p>
+          <h2 class="section-title">A practical stack for <span class="accent-underline">shipping.</span></h2>
         </div>
         <p class="section-copy">
-          A practical stack for building responsive interfaces, reliable APIs, and data-driven products.
+          I choose tools based on the problem, with most of my recent work centered on Vue, NestJS, Spring Boot, and relational databases.
         </p>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <article
-          v-for="(category, index) in skillCategories"
-          :key="category.title"
-          class="skill-card group"
-        >
-          <div class="mb-7 flex items-center justify-between">
-            <div class="icon-box">
-              <component :is="iconMap[category.icon]" :size="21" />
-            </div>
-            <span class="text-xs font-bold" style="color: var(--text-muted)">0{{ index + 1 }}</span>
-          </div>
-          <h3 class="mb-5 text-lg font-bold">{{ category.title }}</h3>
-          <ul class="space-y-3">
-            <li
-              v-for="skill in category.skills"
-              :key="skill.name"
-              class="flex items-center justify-between text-sm"
-              style="color: var(--text-secondary)"
-            >
-              <span>{{ skill.name }}</span>
-              <ArrowUpRight :size="14" class="opacity-0 transition-opacity group-hover:opacity-50" />
-            </li>
+      <div class="skills-grid">
+        <article v-for="(category, index) in skillCategories" :key="category.title" class="skill-card">
+          <header>
+            <div class="skill-icon"><component :is="iconMap[category.icon]" :size="20" /></div>
+            <span>0{{ index + 1 }}</span>
+          </header>
+          <h3>{{ category.title }}</h3>
+          <p>{{ category.skills.length }} tools & technologies</p>
+          <ul class="skill-cloud">
+            <li v-for="skill in category.skills" :key="skill.name">{{ skill.name }}</li>
           </ul>
         </article>
       </div>

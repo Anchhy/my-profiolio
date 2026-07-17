@@ -3,19 +3,20 @@
 A modern, responsive personal portfolio website built with **Vue 3**, **Vite**, **Tailwind CSS v4**, and **TypeScript**.
 
 ![Vue 3](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 
 ## ✨ Features
 
 - 🎨 **Dark / Light Mode** — Persistent toggle with system-preference fallback
-- ⌨️ **Typing Animation** — Cycles through developer titles in the hero section
-- 🌌 **Particle Background** — Interactive constellation effect (tsParticles)
-- 📊 **Animated Skill Bars** — Progress bars animate on scroll
+- 🗂️ **Project Filtering** — Filter featured work by technical focus
+- 🧾 **Project Case Studies** — Accessible detail dialogs with contributions, features, and links
+- ✉️ **Contact Composer** — Validated form that prepares a complete email enquiry
+- 🖨️ **Printable Résumé** — Print-optimized profile that can be saved as PDF
 - 📱 **Mobile-First Design** — Fully responsive with hamburger menu
 - 🎯 **Scroll Spy Navigation** — Active section highlighting in navbar
-- 💎 **Glassmorphism UI** — Modern frosted-glass navbar and cards
+- 📈 **Reading Progress** — Subtle page-progress indicator in the navigation
 - ♿ **Accessible** — Semantic HTML, ARIA labels, keyboard-friendly
 - 🔍 **SEO Optimized** — Meta tags, Open Graph, structured headings
 
@@ -26,16 +27,16 @@ src/
 ├── assets/style.css          # Tailwind import + design system
 ├── components/
 │   ├── NavBar.vue            # Sticky navbar + dark mode toggle
-│   ├── HeroSection.vue       # Hero with particles + typing effect
-│   ├── AboutSection.vue      # About me with icon cards
-│   ├── SkillsSection.vue     # Skill categories + progress bars
-│   ├── ProjectsSection.vue   # Featured project showcase
-│   ├── EducationSection.vue  # Education timeline
-│   ├── ContactSection.vue    # Contact form + info cards
+│   ├── HeroSection.vue       # Hero + print résumé action
+│   ├── AboutSection.vue      # About + working principles
+│   ├── SkillsSection.vue     # Skill categories
+│   ├── ProjectsSection.vue   # Filterable project showcase
+│   ├── ProjectModal.vue      # Accessible project case-study dialog
+│   ├── EducationSection.vue  # Education summary
+│   ├── ContactSection.vue    # Email composer + contact details
 │   └── FooterSection.vue     # Footer with links + back-to-top
 ├── composables/
 │   ├── useDarkMode.ts        # Dark/light mode composable
-│   ├── useTypewriter.ts      # Typing animation composable
 │   └── useScrollAnimation.ts # Intersection Observer composable
 ├── data/
 │   └── portfolio.ts          # All portfolio data objects
@@ -45,7 +46,7 @@ src/
 │   └── index.ts              # Vue Router with smooth scroll
 ├── views/
 │   └── HomeView.vue          # Main page composing all sections
-├── App.vue                   # Root component + loading screen
+├── App.vue                   # Root component
 └── main.ts                   # Entry point
 ```
 
@@ -126,10 +127,9 @@ Or drag-and-drop the `dist/` folder at [app.netlify.com](https://app.netlify.com
 |-------|-----------|
 | Framework | Vue 3 (Composition API) |
 | Build Tool | Vite 8 |
-| Language | TypeScript 5 |
+| Language | TypeScript 6 |
 | Styling | Tailwind CSS 4 |
 | Router | Vue Router 4 |
-| Particles | @tsparticles/vue3 |
 | Icons | Lucide Vue Next |
 
 ## 📄 License

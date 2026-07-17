@@ -1,83 +1,107 @@
 <script setup lang="ts">
-import { projects } from '../data/portfolio'
+import { computed, ref } from 'vue'
+import { ArrowUpRight, ExternalLink, Github, ListFilter, Users } from 'lucide-vue-next'
+import ProjectModal from './ProjectModal.vue'
+import { projects, type Project } from '../data/portfolio'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
-import { Github, ExternalLink, ArrowUpRight, Users } from 'lucide-vue-next'
 
 const { elementRef } = useScrollAnimation()
+const activeFilter = ref('All')
+const selectedProject = ref<Project | null>(null)
 
-const gradients = [
-  'linear-gradient(135deg, #4f46e5, #7c3aed)',
-  'linear-gradient(135deg, #0f766e, #0891b2)',
-  'linear-gradient(135deg, #b45309, #e11d48)',
-]
+const filters = ['All', ...new Set(projects.map((project) => project.category))]
+const visibleProjects = computed(() =>
+  projects
+    .map((project, index) => ({ project, index }))
+    .filter(({ project }) => activeFilter.value === 'All' || project.category === activeFilter.value),
+)
 </script>
 
 <template>
-  <section id="projects" class="section-shell">
+  <section id="projects" class="section-shell section-tint">
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="section-heading-row">
         <div>
-          <p class="section-kicker">Selected work</p>
-          <h2 class="section-title text-left">Projects with <span class="gradient-text">purpose</span></h2>
+          <p class="section-kicker">02 / Selected work</p>
+          <h2 class="section-title">Proof through <span class="accent-underline">projects.</span></h2>
         </div>
         <p class="section-copy">
-          Products that helped me practice full-stack architecture, teamwork, and solving real workflow problems.
+          A selection of products where I practiced architecture, teamwork, and solving real workflow problems.
         </p>
       </div>
 
-      <div class="grid gap-6 lg:grid-cols-2">
+      <div class="project-toolbar" aria-label="Filter projects">
+        <span class="project-filter-label"><ListFilter :size="15" /> Filter by focus</span>
+        <div class="project-filters">
+          <button
+            v-for="filter in filters"
+            :key="filter"
+            type="button"
+            class="filter-button"
+            :class="{ 'filter-button-active': activeFilter === filter }"
+            :aria-pressed="activeFilter === filter"
+            @click="activeFilter = filter"
+          >
+            {{ filter }}
+          </button>
+        </div>
+      </div>
+
+      <TransitionGroup name="project-grid" tag="div" class="projects-grid">
         <article
-          v-for="(project, idx) in projects"
+          v-for="({ project, index }, visibleIndex) in visibleProjects"
           :key="project.title"
-          class="project-card group"
-          :class="{ 'lg:col-span-2 lg:grid lg:grid-cols-[0.85fr_1.15fr]': idx === 0 }"
+          class="project-card"
+          :class="{ 'project-card-featured': visibleIndex === 0 && activeFilter === 'All' }"
         >
-          <div class="project-visual" :style="{ background: gradients[idx % gradients.length] }">
-            <span class="project-number">0{{ idx + 1 }}</span>
-            <div class="relative z-10">
-              <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-white/70">{{ project.eyebrow }}</p>
-              <h3 class="max-w-lg text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl">
-                {{ project.title }}
-              </h3>
+          <div class="project-art" :class="`project-art-${index + 1}`">
+            <div class="project-browser" aria-hidden="true">
+              <div class="browser-bar"><i></i><i></i><i></i><span>{{ project.eyebrow }}</span></div>
+              <div class="browser-content">
+                <span class="browser-label">PROJECT 0{{ index + 1 }}</span>
+                <strong>{{ project.title }}</strong>
+                <div class="browser-lines"><i></i><i></i><i></i></div>
+              </div>
             </div>
-            <div class="project-orb project-orb-one"></div>
-            <div class="project-orb project-orb-two"></div>
+            <span class="project-category">{{ project.category }}</span>
           </div>
 
-          <div class="flex flex-col p-6 sm:p-8">
-            <div class="mb-5 flex flex-wrap items-center gap-2">
+          <div class="project-body">
+            <div class="mb-4 flex flex-wrap items-center gap-2">
               <span v-if="project.isGroupProject" class="meta-chip"><Users :size="13" /> Team project</span>
-              <span v-if="project.teamInfo" class="meta-chip">{{ project.teamInfo }}</span>
+              <span v-if="project.teamInfo" class="meta-chip meta-chip-neutral">{{ project.teamInfo }}</span>
+            </div>
+            <h3>{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+
+            <div class="project-tech-list">
+              <span v-for="tech in project.techStack.slice(0, 5)" :key="tech">{{ tech }}</span>
+              <span v-if="project.techStack.length > 5">+{{ project.techStack.length - 5 }}</span>
             </div>
 
-            <p class="mb-5 leading-7" style="color: var(--text-secondary)">{{ project.description }}</p>
-
-            <div class="contribution-block mb-6">
-              <p class="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-primary-500)]">My contribution</p>
-              <p class="text-sm leading-6" style="color: var(--text-primary)">{{ project.contribution }}</p>
-            </div>
-
-            <div class="mb-7 flex flex-wrap gap-2">
-              <span v-for="tech in project.techStack" :key="tech" class="tech-chip">{{ tech }}</span>
-            </div>
-
-            <div class="mt-auto flex flex-wrap gap-4 border-t pt-5" style="border-color: var(--border)">
-              <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-                <ExternalLink :size="16" /> Live demo <ArrowUpRight :size="14" />
+            <div class="project-actions">
+              <button type="button" class="project-detail-button" @click="selectedProject = project">
+                View details <ArrowUpRight :size="15" />
+              </button>
+              <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="Open live demo">
+                <ExternalLink :size="17" />
               </a>
-              <a v-if="project.githubUrl" :href="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-                <Github :size="16" /> Source code <ArrowUpRight :size="14" />
-              </a>
-              <a v-if="project.githubBackendUrl" :href="project.githubBackendUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-                <Github :size="16" /> Backend <ArrowUpRight :size="14" />
-              </a>
-              <a v-if="project.githubFrontendUrl" :href="project.githubFrontendUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-                <Github :size="16" /> Frontend <ArrowUpRight :size="14" />
+              <a
+                v-if="project.githubUrl || project.githubFrontendUrl"
+                :href="project.githubUrl || project.githubFrontendUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-icon-link"
+                aria-label="Open source code on GitHub"
+              >
+                <Github :size="17" />
               </a>
             </div>
           </div>
         </article>
-      </div>
+      </TransitionGroup>
     </div>
+
+    <ProjectModal :project="selectedProject" @close="selectedProject = null" />
   </section>
 </template>
