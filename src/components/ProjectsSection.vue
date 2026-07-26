@@ -54,8 +54,18 @@ const visibleProjects = computed(() =>
           class="project-card"
           :class="{ 'project-card-featured': visibleIndex === 0 && activeFilter === 'All' }"
         >
-          <div class="project-art" :class="`project-art-${index + 1}`">
-            <div class="project-browser" aria-hidden="true">
+          <div
+            class="project-art"
+            :class="[`project-art-${index + 1}`, { 'project-art-with-image': project.imageUrl }]"
+          >
+            <img
+              v-if="project.imageUrl"
+              :src="project.imageUrl"
+              :alt="`${project.title} interface preview`"
+              class="project-preview-image"
+              loading="lazy"
+            />
+            <div v-else class="project-browser" aria-hidden="true">
               <div class="browser-bar"><i></i><i></i><i></i><span>{{ project.eyebrow }}</span></div>
               <div class="browser-content">
                 <span class="browser-label">PROJECT 0{{ index + 1 }}</span>

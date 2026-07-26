@@ -1,3 +1,5 @@
+import arenaClashImage from '../assets/Arena-clash.png'
+
 // ────────── Personal Info ──────────
 export interface PersonalInfo {
   name: string
@@ -116,6 +118,28 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: 'Arena Clash',
+    eyebrow: 'Multiplayer browser game',
+    category: 'Full stack',
+    description:
+      'Server-authoritative multiplayer fighting game for 1–4 players, featuring private rooms, CPU opponents, responsive controls, and Khmer-inspired visuals.',
+    contribution:
+      'Built the real-time game client and authoritative server, including party management, combat simulation, reconnect flows, persistence, and responsive keyboard and touch controls.',
+    features: [
+      'Real-time 1–4 player battles',
+      'Four game modes with CPU opponents',
+      'Private room codes and persistent parties',
+      'Server-authoritative combat and anti-cheat validation',
+      'Keyboard and multi-touch mobile controls',
+      'Signed player reconnection',
+      'Match results and player statistics',
+    ],
+    techStack: ['TypeScript', 'Phaser', 'NestJS', 'Socket.IO', 'Prisma', 'PostgreSQL', 'Redis'],
+    githubUrl: 'https://github.com/Anchhy/ARENA-CLASH',
+    liveUrl: 'https://arena-clash-mnxo.onrender.com/',
+    imageUrl: arenaClashImage,
+  },
   {
     title: 'NearMe Social',
     eyebrow: 'Social platform',
