@@ -1,4 +1,5 @@
 import arenaClashImage from '../assets/Arena-clash.png'
+import flowStateImage from '../assets/flowstate.png'
 
 // ────────── Personal Info ──────────
 export interface PersonalInfo {
@@ -103,7 +104,7 @@ export const skillCategories: SkillCategory[] = [
 export interface Project {
   title: string
   eyebrow: string
-  category: 'Full stack' | 'Backend' | 'Java'
+  category: 'Full stack' | 'Frontend' | 'Backend' | 'Java'
   description: string
   contribution: string
   features: string[]
@@ -118,6 +119,28 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: 'FlowState',
+    eyebrow: 'Focus and productivity app',
+    category: 'Frontend',
+    description:
+      'A calm, privacy-first productivity app that combines a customizable focus timer, layered ambient soundscapes, and locally stored progress tracking.',
+    contribution:
+      'Designed and built the responsive React experience, including focus and break workflows, a browser-based ambient sound mixer, animated interactions, and local session analytics.',
+    features: [
+      'Customizable 15–90 minute focus sessions',
+      'Focus and break timer workflows',
+      'Eight mixable ambient soundscapes',
+      'Weekly activity and focus streaks',
+      'Recent session history and averages',
+      'Private browser-local data storage',
+      'Responsive, motion-rich interface',
+    ],
+    techStack: ['React 19', 'Vite', 'Zustand', 'Framer Motion', 'Web Audio API', 'LocalStorage'],
+    githubUrl: 'https://github.com/et-anchhy/FlowState',
+    liveUrl: 'http://flowstate.et-anchhy.me/',
+    imageUrl: flowStateImage,
+  },
   {
     title: 'Arena Clash',
     eyebrow: 'Multiplayer browser game',
