@@ -1,23 +1,28 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
-import { ArrowUpRight, Menu, Moon, Sun, X } from 'lucide-vue-next'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ArrowUpRight, BookOpen, Menu, Moon, Sun, X } from 'lucide-vue-next'
 import { useDarkMode } from '../composables/useDarkMode'
 
 const { isDark, toggle } = useDarkMode()
+const route = useRoute()
+const router = useRouter()
 
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 const activeSection = ref('hero')
 const scrollProgress = ref(0)
+const isLearningPage = computed(() => route.path.startsWith('/learn'))
 
 const navLinks = [
   { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Work', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Education', href: '#education' },
 ]
 
-const sections = ['hero', 'about', 'projects', 'skills', 'education', 'contact']
+const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'education', 'contact']
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 24
@@ -34,8 +39,14 @@ const handleScroll = () => {
   }
 }
 
-const scrollTo = (href: string) => {
+const scrollTo = async (href: string) => {
   isMobileMenuOpen.value = false
+
+  if (route.name !== 'home') {
+    await router.push({ name: 'home', hash: href })
+    return
+  }
+
   document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   window.history.replaceState(null, '', href)
 }
@@ -63,7 +74,7 @@ onUnmounted(() => {
       :class="{ 'nav-shell-scrolled': isScrolled }"
       aria-label="Primary navigation"
     >
-      <a href="#hero" class="brand-mark" aria-label="Et Anchhy, back to home" @click.prevent="scrollTo('#hero')">
+      <a href="/#hero" class="brand-mark" aria-label="Et Anchhy, back to home" @click.prevent="scrollTo('#hero')">
         <span class="brand-monogram">EA</span>
         <span>
           <strong>Et Anchhy</strong>
@@ -83,6 +94,14 @@ onUnmounted(() => {
         >
           {{ link.label }}
         </a>
+        <RouterLink
+          to="/learn"
+          class="nav-link inline-flex items-center gap-1.5"
+          :class="{ 'nav-link-active': isLearningPage }"
+          :aria-current="isLearningPage ? 'page' : undefined"
+        >
+          <BookOpen :size="14" /> Learn
+        </RouterLink>
       </div>
 
       <div class="flex items-center gap-2">
@@ -99,12 +118,12 @@ onUnmounted(() => {
           </Transition>
         </button>
 
-        <a href="#contact" class="nav-cta hidden sm:inline-flex" @click.prevent="scrollTo('#contact')">
+        <a href="/#contact" class="nav-cta hidden sm:inline-flex" @click.prevent="scrollTo('#contact')">
           Let’s talk <ArrowUpRight :size="15" />
         </a>
 
         <button
-          class="icon-button lg:hidden"
+          class="icon-button nav-mobile-toggle lg:hidden"
           type="button"
           aria-controls="mobile-navigation"
           :aria-expanded="isMobileMenuOpen"
@@ -123,7 +142,7 @@ onUnmounted(() => {
 
     <Transition name="menu">
       <div v-if="isMobileMenuOpen" id="mobile-navigation" class="mobile-menu mx-auto mt-2 max-w-7xl lg:hidden">
-        <a href="#hero" class="mobile-link" @click.prevent="scrollTo('#hero')">Home</a>
+        <a href="/#hero" class="mobile-link" @click.prevent="scrollTo('#hero')">Home</a>
         <a
           v-for="link in navLinks"
           :key="link.href"
@@ -134,7 +153,15 @@ onUnmounted(() => {
         >
           {{ link.label }}
         </a>
-        <a href="#contact" class="mobile-contact" @click.prevent="scrollTo('#contact')">
+        <RouterLink
+          to="/learn"
+          class="mobile-link"
+          :class="{ 'mobile-link-active': isLearningPage }"
+          @click="isMobileMenuOpen = false"
+        >
+          Learn <BookOpen :size="16" />
+        </RouterLink>
+        <a href="/#contact" class="mobile-contact" @click.prevent="scrollTo('#contact')">
           Start a conversation <ArrowUpRight :size="16" />
         </a>
       </div>
@@ -151,4 +178,8 @@ onUnmounted(() => {
 .menu-leave-active { transition: opacity 0.2s ease, transform 0.2s ease; }
 .menu-enter-from,
 .menu-leave-to { opacity: 0; transform: translateY(-8px); }
+
+@media (min-width: 1024px) {
+  .nav-mobile-toggle { display: none; }
+}
 </style>

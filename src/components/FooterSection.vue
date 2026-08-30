@@ -15,10 +15,12 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
       </div>
 
       <nav class="footer-links" aria-label="Footer navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Work</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <RouterLink :to="{ name: 'home', hash: '#about' }">About</RouterLink>
+        <RouterLink :to="{ name: 'home', hash: '#experience' }">Experience</RouterLink>
+        <RouterLink :to="{ name: 'home', hash: '#projects' }">Work</RouterLink>
+        <RouterLink :to="{ name: 'home', hash: '#skills' }">Skills</RouterLink>
+        <RouterLink to="/learn">Learn</RouterLink>
+        <RouterLink :to="{ name: 'home', hash: '#contact' }">Contact</RouterLink>
       </nav>
 
       <div class="footer-actions">

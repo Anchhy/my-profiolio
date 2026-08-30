@@ -12,7 +12,7 @@ const iconMap: Record<string, typeof Monitor> = { monitor: Monitor, server: Serv
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="section-heading-row">
         <div>
-          <p class="section-kicker">03 / Capabilities</p>
+          <p class="section-kicker">04 / Capabilities</p>
           <h2 class="section-title">A practical stack for <span class="accent-underline">shipping.</span></h2>
         </div>
         <p class="section-copy">

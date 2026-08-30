@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Et Anchhy — Full-Stack Web Developer</title>
+    <style>
+      :root {
+        --ink: #16212a;
+        --muted: #52616c;
+        --accent: #087f78;
+        --line: #cfd9dc;
+        --soft: #eef6f5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e9eef0;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.35;
+      }
+
+      body {
+        padding: 12mm 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        padding: 12mm 14mm 10mm;
+        background: white;
+        box-shadow: 0 2mm 8mm rgb(29 52 60 / 12%);
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8mm;
+        align-items: end;
+        padding-bottom: 5mm;
+        border-bottom: 1.5px solid var(--accent);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1;
+        letter-spacing: -0.6px;
+      }
+
+      .role {
+        margin: 2mm 0 0;
+        color: var(--accent);
+        font-size: 11.5pt;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+
+      .contact {
+        display: grid;
+        gap: 1.1mm;
+        color: var(--muted);
+        font-size: 8.7pt;
+        font-style: normal;
+        text-align: right;
+      }
+
+      .contact a:hover {
+        color: var(--accent);
+      }
+
+      .summary {
+        margin: 4.5mm 0 0;
+        color: #2d3c46;
+        font-size: 9.7pt;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 53mm 1fr;
+        gap: 7mm;
+        margin-top: 5mm;
+      }
+
+      .sidebar {
+        padding-right: 6mm;
+        border-right: 1px solid var(--line);
+      }
+
+      section + section {
+        margin-top: 5mm;
+      }
+
+      h2 {
+        margin: 0 0 2.5mm;
+        color: var(--accent);
+        font-size: 9.2pt;
+        line-height: 1.2;
+        letter-spacing: 1.3px;
+        text-transform: uppercase;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 10.1pt;
+        line-height: 1.25;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .degree {
+        font-weight: 700;
+      }
+
+      .institution {
+        margin-top: 1mm;
+        color: var(--muted);
+      }
+
+      .date {
+        margin-top: 1.2mm;
+        color: var(--accent);
+        font-size: 8.5pt;
+        font-weight: 700;
+      }
+
+      .skill-group + .skill-group {
+        margin-top: 3mm;
+      }
+
+      .skill-group h3 {
+        margin-bottom: 1mm;
+        font-size: 8.9pt;
+      }
+
+      .skill-group p {
+        color: var(--muted);
+        font-size: 8.8pt;
+        line-height: 1.45;
+      }
+
+      .languages p + p {
+        margin-top: 1mm;
+      }
+
+      .languages strong {
+        display: inline-block;
+        min-width: 19mm;
+      }
+
+      .project {
+        position: relative;
+        padding-left: 3.5mm;
+      }
+
+      .experience {
+        position: relative;
+        padding-left: 3.5mm;
+      }
+
+      .project::before,
+      .experience::before {
+        position: absolute;
+        top: 1mm;
+        bottom: 0.8mm;
+        left: 0;
+        width: 1.2px;
+        background: var(--line);
+        content: '';
+      }
+
+      .project + .project {
+        margin-top: 4.2mm;
+      }
+
+      .experience-meta {
+        margin-top: 0.8mm;
+        color: var(--accent);
+        font-size: 8.4pt;
+        font-weight: 700;
+      }
+
+      .project-heading {
+        display: flex;
+        gap: 3mm;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+
+      .project-link {
+        flex: 0 0 auto;
+        color: var(--accent);
+        font-size: 8.1pt;
+        font-weight: 700;
+      }
+
+      .stack {
+        margin-top: 0.8mm;
+        color: var(--accent);
+        font-size: 8.4pt;
+        font-weight: 700;
+      }
+
+      ul {
+        margin: 1.5mm 0 0;
+        padding-left: 4.5mm;
+      }
+
+      li {
+        margin: 0.8mm 0;
+        padding-left: 0.5mm;
+        color: #34444e;
+      }
+
+      footer {
+        margin-top: 5mm;
+        padding-top: 2.5mm;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 8pt;
+        text-align: center;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html,
+        body {
+          background: white;
+        }
+
+        body {
+          padding: 0;
+        }
+
+        .page {
+          min-height: 297mm;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div>
+          <h1>Et Anchhy</h1>
+          <p class="role">Full-Stack Web Developer</p>
+        </div>
+        <address class="contact">
+          <span>Phnom Penh, Cambodia</span>
+          <a href="tel:+85593610886">+855 93 610 886</a>
+          <a href="mailto:etanchhy@gmail.com">etanchhy@gmail.com</a>
+          <a href="https://et-anchhy.me">et-anchhy.me</a>
+          <a href="https://github.com/Anchhy">github.com/Anchhy</a>
+        </address>
+      </header>
+
+      <p class="summary">
+        Fourth-year Information &amp; Communication Engineering student, full-stack developer, and Backend Developer Intern at the Cambodia Council of Nurses. Experienced in building secure NestJS APIs, authentication and notification workflows, responsive interfaces, relational databases, real-time systems, testing, and collaborative Git workflows.
+      </p>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <section>
+            <h2>Education</h2>
+            <p class="degree">Engineer Degree Program</p>
+            <p>Information &amp; Communication Engineering</p>
+            <p class="institution">Institute of Technology of Cambodia</p>
+            <p class="date">2022 — Present · Year 4</p>
+          </section>
+
+          <section>
+            <h2>Technical Skills</h2>
+            <div class="skill-group">
+              <h3>Frontend</h3>
+              <p>Vue 3, React, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Phaser</p>
+            </div>
+            <div class="skill-group">
+              <h3>Backend</h3>
+              <p>NestJS, Node.js, Spring Boot, Java, Laravel, REST APIs, Socket.IO, JWT</p>
+            </div>
+            <div class="skill-group">
+              <h3>Data</h3>
+              <p>PostgreSQL, MySQL, Sequelize, Prisma, TypeORM, Redis, Flyway</p>
+            </div>
+            <div class="skill-group">
+              <h3>Tools</h3>
+              <p>Git, GitHub, Docker, Jenkins, Postman, Linux, Maven, Vite</p>
+            </div>
+          </section>
+
+          <section class="languages">
+            <h2>Strengths</h2>
+            <p>Responsive UI development</p>
+            <p>API design &amp; integration</p>
+            <p>Real-time applications</p>
+            <p>Team collaboration</p>
+          </section>
+        </aside>
+
+        <div>
+          <section>
+            <h2>Experience</h2>
+
+            <article class="experience">
+              <div class="project-heading">
+                <h3>Backend Developer Intern</h3>
+                <span class="project-link">2026 — Present</span>
+              </div>
+              <p class="experience-meta">Cambodia Council of Nurses (CCN) · Phnom Penh</p>
+              <ul>
+                <li>Develop and maintain NestJS APIs for authentication, OTP and password recovery, JWT sessions, role-based access, and web/mobile integration.</li>
+                <li>Improved personal and actionable-work notifications for Workflow, CPD, and Presentation processes, including unread counts, read-state handling, and real-time delivery.</li>
+                <li>Diagnosed a polymorphic notification-reference database constraint, delivered repeatable PostgreSQL remediation, and verified critical behavior with Jest, Postman, and production builds.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section>
+            <h2>Selected Projects</h2>
+
+            <article class="project">
+              <div class="project-heading">
+                <h3>SkillBridge-KH</h3>
+                <a class="project-link" href="https://github.com/Anchhy/skill-bridge-frontend">GitHub ↗</a>
+              </div>
+              <p class="stack">Angular 22 · NestJS 11 · TypeScript · Prisma 7 · PostgreSQL 17 · Docker</p>
+              <ul>
+                <li>Built a student opportunity platform connecting Cambodian university students with internships, project teammates, and beginner-friendly freelance work.</li>
+                <li>Developed secure role-based workflows, marketplace discovery, applications, collaboration tools, notifications, moderation, and production-ready deployment infrastructure.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-heading">
+                <h3>FlowState</h3>
+                <a class="project-link" href="https://github.com/et-anchhy/FlowState">GitHub ↗</a>
+              </div>
+              <p class="stack">React 19 · Vite · Zustand · Framer Motion · Web Audio API</p>
+              <ul>
+                <li>Designed and built a privacy-first productivity app with customizable focus and break timers, task naming, and browser-local session history.</li>
+                <li>Created an eight-channel ambient sound mixer and responsive analytics dashboard with weekly activity, averages, and focus streaks.</li>
+              </ul>
+            </article>
+
+            <article class="project">
+              <div class="project-heading">
+                <h3>NearMe Social <span style="color: var(--muted); font-size: 8.4pt; font-weight: 400">— Team project</span></h3>
+                <a class="project-link" href="https://github.com/NearMe-Social/nms_frontend">GitHub ↗</a>
+              </div>
+              <p class="stack">Vue 3 · NestJS · PostgreSQL · TypeORM</p>
+              <ul>
+                <li>Built notification backend architecture and core social interfaces for a location-based community platform.</li>
+                <li>Implemented private chat, post and discussion experiences, real-time notifications, reporting, blocking, and administration tools.</li>
+              </ul>
+            </article>
+
+          </section>
+
+          <footer>Open to junior full-stack and backend opportunities · References available upon request</footer>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

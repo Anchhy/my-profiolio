@@ -22,7 +22,7 @@ const visibleProjects = computed(() =>
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="section-heading-row">
         <div>
-          <p class="section-kicker">02 / Selected work</p>
+          <p class="section-kicker">03 / Selected work</p>
           <h2 class="section-title">Proof through <span class="accent-underline">projects.</span></h2>
         </div>
         <p class="section-copy">

@@ -7,6 +7,21 @@ const routes: RouteRecordRaw[] = [
     name: 'home',
     component: HomeView,
   },
+  {
+    path: '/learn',
+    name: 'learn',
+    component: () => import('../views/LearningHubView.vue'),
+  },
+  {
+    path: '/learn/nestjs',
+    name: 'learn-nestjs',
+    component: () => import('../views/NestJsLearningView.vue'),
+  },
+  {
+    path: '/learn/:course',
+    name: 'learn-course',
+    component: () => import('../views/CourseLearningView.vue'),
+  },
 ]
 
 const router = createRouter({

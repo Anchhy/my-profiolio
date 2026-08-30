@@ -334,6 +334,24 @@ html.dark .nav-cta:hover { color: #090d18; }
 .principle-card h3 { margin-top: 4.2rem; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.025em; }
 .principle-card p { margin-top: 0.7rem; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; }
 
+/* Experience */
+.experience-card { position: relative; display: grid; gap: 1.5rem; overflow: hidden; padding: 1.5rem; border: 1px solid var(--border); border-radius: 1.35rem; background: var(--surface); box-shadow: 0 20px 60px rgb(34 42 75 / 0.08); }
+.experience-card::after { position: absolute; width: 18rem; height: 18rem; right: -11rem; bottom: -12rem; border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent); border-radius: 999px; content: ''; }
+.experience-mark { display: flex; width: 4rem; height: 4rem; align-items: center; justify-content: center; border-radius: 1rem; background: var(--text-primary); color: var(--bg); }
+.experience-main { position: relative; z-index: 1; min-width: 0; }
+.experience-labels { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; }
+.experience-status { display: inline-flex; padding: 0.38rem 0.58rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); font-size: 0.61rem; font-weight: 850; }
+.experience-period, .experience-location { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); font-size: 0.7rem; font-weight: 750; }
+.experience-main h3 { margin-top: 0.75rem; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 820; letter-spacing: -0.045em; }
+.experience-organization { margin-top: 0.35rem; color: var(--accent-strong); font-size: 0.82rem; font-weight: 800; }
+.experience-summary { max-width: 55rem; margin-top: 1rem; color: var(--text-secondary); font-size: 0.84rem; line-height: 1.75; }
+.experience-achievements { display: grid; gap: 0.65rem; margin-top: 1.35rem; }
+.experience-achievements li { display: flex; gap: 0.65rem; color: var(--text-secondary); font-size: 0.78rem; line-height: 1.6; }
+.experience-achievements span { display: flex; width: 1.35rem; height: 1.35rem; flex: 0 0 auto; align-items: center; justify-content: center; margin-top: 0.1rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); }
+.experience-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.35rem; }
+.experience-tech li { padding: 0.38rem 0.58rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--bg); color: var(--text-secondary); font-size: 0.63rem; font-weight: 750; }
+.experience-location { position: relative; z-index: 1; align-self: start; white-space: nowrap; }
+
 /* Projects */
 .project-toolbar { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.35rem; }
 .project-filter-label { display: inline-flex; align-items: center; gap: 0.42rem; color: var(--text-muted); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -467,6 +485,8 @@ html.dark .nav-cta:hover { color: #090d18; }
   .section-shell { padding-inline: 1.5rem; }
   .principles-grid, .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .project-toolbar { flex-direction: row; align-items: center; justify-content: space-between; }
+  .experience-card { grid-template-columns: auto 1fr; padding: 2rem; }
+  .experience-location { grid-column: 2; }
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .modal-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .education-card { grid-template-columns: auto 1fr; padding: 2rem; }
@@ -478,6 +498,8 @@ html.dark .nav-cta:hover { color: #090d18; }
 @media (min-width: 768px) {
   .section-heading-row { grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr); }
   .about-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 5rem; }
+  .experience-card { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .experience-location { grid-column: auto; padding-top: 0.4rem; }
   .principles-grid { grid-template-columns: repeat(3, 1fr); }
   .education-card { grid-template-columns: auto 1fr auto; align-items: start; }
   .education-meta { grid-column: auto; padding-top: 0.35rem; }
@@ -531,7 +553,7 @@ html.dark .nav-cta:hover { color: #090d18; }
   .projects-grid, .skills-grid, .principles-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .project-card-featured { grid-column: auto; display: flex; }
   .project-art { min-height: 8cm; }
-  .project-card, .skill-card, .principle-card, .education-card { break-inside: avoid; box-shadow: none; }
+  .project-card, .skill-card, .principle-card, .experience-card, .education-card { break-inside: avoid; box-shadow: none; }
   .contact-panel { display: block; background: white; color: #111; box-shadow: none; border: 1px solid #ddd; }
   .contact-intro { padding: 1cm; }
   .contact-intro::after { display: none; }

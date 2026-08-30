@@ -1,5 +1,5 @@
-import arenaClashImage from '../assets/Arena-clash.png'
 import flowStateImage from '../assets/flowstate.png'
+import skillBridgeImage from '../assets/skillbridge-kh.png'
 
 // ────────── Personal Info ──────────
 export interface PersonalInfo {
@@ -20,9 +20,10 @@ export const personalInfo: PersonalInfo = {
   name: 'Et Anchhy',
   title: 'Full-Stack Web Developer',
   intro:
-    'I turn product ideas into clear interfaces and dependable APIs using Vue, NestJS, and Spring Boot.',
+    'I build clear interfaces and dependable APIs, with hands-on backend experience in authentication, workflow, and notification systems.',
   location: 'Phnom Penh, Cambodia',
-  availability: 'Open to internship opportunities',
+  availability: 'Open to junior developer opportunities',
+  resumeUrl: '/Et-Anchhy-Resume.pdf',
   socialLinks: {
     github: 'https://github.com/Anchhy',
     email: 'etanchhy@gmail.com',
@@ -33,9 +34,9 @@ export const personalInfo: PersonalInfo = {
 // ────────── About ──────────
 export const aboutPoints: string[] = [
   'Year 4 Information & Communication Engineering student at ITC.',
-  'Comfortable working across frontend, backend, and relational databases.',
-  'Experienced in collaborative projects, Git workflows, and API integration.',
-  'Currently looking for a web development internship where I can learn and contribute.',
+  'Backend Developer Intern contributing to the Cambodia Council of Nurses platform.',
+  'Hands-on experience with secure authentication, workflow APIs, and real-time notifications.',
+  'Comfortable working across frontend, backend, relational databases, and collaborative Git workflows.',
 ]
 
 // ────────── Skills ──────────
@@ -73,6 +74,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'NestJS', level: 82 },
       { name: 'Laravel', level: 70 },
       { name: 'REST API', level: 85 },
+      { name: 'Sequelize', level: 78 },
       { name: 'TypeORM', level: 75 },
       { name: 'JWT Authentication', level: 78 },
     ],
@@ -97,6 +99,37 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Linux', level: 75 },
       { name: 'VS Code', level: 90 },
     ],
+  },
+]
+
+// ────────── Experience ──────────
+export interface Experience {
+  organization: string
+  role: string
+  employmentType: string
+  period: string
+  location: string
+  summary: string
+  achievements: string[]
+  techStack: string[]
+}
+
+export const experience: Experience[] = [
+  {
+    organization: 'Cambodia Council of Nurses (CCN)',
+    role: 'Backend Developer Intern',
+    employmentType: 'Internship',
+    period: '2026 — Present',
+    location: 'Phnom Penh, Cambodia',
+    summary:
+      'Contributing to a production-oriented nursing council platform with a focus on API reliability, authentication, authorization, and notification workflows.',
+    achievements: [
+      'Developed and maintained NestJS REST APIs for login, OTP verification, password recovery, session validation, and role-based access.',
+      'Improved personal and actionable-work notifications across workflow, CPD, and Presentation processes, including unread counts and read-state handling.',
+      'Diagnosed a polymorphic notification-reference database constraint and delivered a repeatable PostgreSQL remediation with focused automated verification.',
+      'Validated backend behavior with Jest, Postman, TypeScript builds, and API contract checks for web and mobile clients.',
+    ],
+    techStack: ['NestJS', 'TypeScript', 'PostgreSQL', 'Sequelize', 'JWT', 'Socket.IO', 'Jest', 'Postman'],
   },
 ]
 
@@ -142,26 +175,26 @@ export const projects: Project[] = [
     imageUrl: flowStateImage,
   },
   {
-    title: 'Arena Clash',
-    eyebrow: 'Multiplayer browser game',
+    title: 'SkillBridge-KH',
+    eyebrow: 'Student opportunity platform',
     category: 'Full stack',
     description:
-      'Server-authoritative multiplayer fighting game for 1–4 players, featuring private rooms, CPU opponents, responsive controls, and Khmer-inspired visuals.',
+      'A student-focused platform that connects Cambodian university students with internships, project teammates, and beginner-friendly freelance opportunities.',
     contribution:
-      'Built the real-time game client and authoritative server, including party management, combat simulation, reconnect flows, persistence, and responsive keyboard and touch controls.',
+      'Designed and built the Angular frontend and NestJS API, including secure role-based workflows, marketplace discovery, applications, team collaboration, administration, and production-ready deployment infrastructure.',
     features: [
-      'Real-time 1–4 player battles',
-      'Four game modes with CPU opponents',
-      'Private room codes and persistent parties',
-      'Server-authoritative combat and anti-cheat validation',
-      'Keyboard and multi-touch mobile controls',
-      'Signed player reconnection',
-      'Match results and player statistics',
+      'Internship discovery, saving, applications, and interview scheduling',
+      'Student project teammate matching, tasks, and milestones',
+      'Beginner freelance jobs, proposals, deliverables, and reviews',
+      'Student, company, client, and administrator roles',
+      'Secure JWT sessions with rotating HttpOnly refresh cookies',
+      'Notifications, reporting, moderation, and audit records',
+      'Responsive Angular interface with unified search and dashboards',
     ],
-    techStack: ['TypeScript', 'Phaser', 'NestJS', 'Socket.IO', 'Prisma', 'PostgreSQL', 'Redis'],
-    githubUrl: 'https://github.com/Anchhy/ARENA-CLASH',
-    liveUrl: 'https://arena-clash-mnxo.onrender.com/',
-    imageUrl: arenaClashImage,
+    techStack: ['Angular 22', 'NestJS 11', 'TypeScript', 'Prisma 7', 'PostgreSQL 17', 'Docker'],
+    githubFrontendUrl: 'https://github.com/Anchhy/skill-bridge-frontend',
+    githubBackendUrl: 'https://github.com/Anchhy/skill-bridge-backend',
+    imageUrl: skillBridgeImage,
   },
   {
     title: 'NearMe Social',

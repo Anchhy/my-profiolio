@@ -11,7 +11,7 @@ const { elementRef } = useScrollAnimation()
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="section-heading-row">
         <div>
-          <p class="section-kicker">04 / Education</p>
+          <p class="section-kicker">05 / Education</p>
           <h2 class="section-title">Engineering a strong <span class="accent-underline">foundation.</span></h2>
         </div>
         <p class="section-copy">

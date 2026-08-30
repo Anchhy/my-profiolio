@@ -4,16 +4,15 @@ import {
   ArrowUpRight,
   Code2,
   Database,
+  Download,
   Github,
   Mail,
   MapPin,
-  Printer,
 } from 'lucide-vue-next'
 import { personalInfo } from '../data/portfolio'
 import profilePhoto from '../assets/mypic.jpg'
 
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-const printProfile = () => window.print()
 </script>
 
 <template>
@@ -44,9 +43,14 @@ const printProfile = () => window.print()
           <a :href="personalInfo.socialLinks.github" target="_blank" rel="noopener noreferrer" class="btn-secondary">
             <Github :size="17" /> GitHub <ArrowUpRight :size="14" />
           </a>
-          <button type="button" class="btn-quiet" title="Print or save this portfolio as a PDF" @click="printProfile">
-            <Printer :size="17" /> Save as résumé
-          </button>
+          <a
+            v-if="personalInfo.resumeUrl"
+            :href="personalInfo.resumeUrl"
+            download="Et-Anchhy-Resume.pdf"
+            class="btn-quiet"
+          >
+            <Download :size="17" /> Download résumé
+          </a>
         </div>
 
         <div class="hero-meta">
@@ -55,7 +59,7 @@ const printProfile = () => window.print()
         </div>
 
         <div class="hero-proof" aria-label="Portfolio highlights">
-          <div><strong>3</strong><span>Featured<br />projects</span></div>
+          <div><strong>5</strong><span>Featured<br />projects</span></div>
           <div><strong>4th</strong><span>Year ICE<br />student</span></div>
           <div><strong>FE→BE</strong><span>End-to-end<br />thinking</span></div>
         </div>
