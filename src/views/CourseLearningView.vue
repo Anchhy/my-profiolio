@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeft, ArrowRight, BookOpen, Check, CheckCircle2, ChevronDown, Clipboard, Code2, ExternalLink, FileText, GraduationCap, Lightbulb, ListChecks, Rocket, Sparkles } from 'lucide-vue-next'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
@@ -7,7 +7,6 @@ import { courses, coursesBySlug } from '../data/learning'
 
 const route = useRoute()
 const router = useRouter()
-const previousTitle = document.title
 const openLessons = ref<number[]>([0])
 const selectedAnswers = ref<Record<number, number>>({})
 const copied = ref(false)
@@ -41,18 +40,9 @@ watch(
     }
     openLessons.value = [0]
     selectedAnswers.value = {}
-    document.title = `Learn ${course.value.title} — Et Anchhy`
   },
   { immediate: true },
 )
-
-onMounted(() => {
-  if (course.value) document.title = `Learn ${course.value.title} — Et Anchhy`
-})
-
-onUnmounted(() => {
-  document.title = previousTitle
-})
 </script>
 
 <template>
@@ -88,7 +78,7 @@ onUnmounted(() => {
           <a :href="course.officialUrl" target="_blank" rel="noopener noreferrer" class="official-link">Official documentation <ExternalLink :size="14" /></a>
         </aside>
 
-        <main class="course-content">
+        <div class="course-content">
           <section id="lessons" class="course-section">
             <p class="section-label">01 · Learning path</p><h2>Build your understanding step by step.</h2><p class="section-intro">Open a lesson to see the concepts you should be able to explain and use before moving forward.</p>
             <div class="lesson-list">
@@ -130,7 +120,7 @@ onUnmounted(() => {
           </section>
 
           <section class="more-courses" aria-labelledby="more-course-title"><p class="section-label">Keep learning</p><h2 id="more-course-title">Other courses</h2><div><RouterLink v-for="item in courses.filter((item) => item.slug !== course.slug).slice(0, 4)" :key="item.slug" :to="`/learn/${item.slug}`" :style="{ '--item': item.accent, '--item-soft': item.softAccent }"><span>{{ item.title.slice(0, 2) }}</span><strong>{{ item.title }}</strong><small>{{ item.category }}</small><ArrowRight :size="15" /></RouterLink></div></section>
-        </main>
+        </div>
       </div>
     </div>
   </DefaultLayout>

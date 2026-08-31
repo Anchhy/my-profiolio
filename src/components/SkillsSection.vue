@@ -16,7 +16,7 @@ const iconMap: Record<string, typeof Monitor> = { monitor: Monitor, server: Serv
           <h2 class="section-title">A practical stack for <span class="accent-underline">shipping.</span></h2>
         </div>
         <p class="section-copy">
-          I choose tools based on the problem, with most of my recent work centered on Vue, NestJS, Spring Boot, and relational databases.
+          Tools I’ve used across internships and shipped projects, with recent work centered on TypeScript, NestJS, modern frontend frameworks, and PostgreSQL.
         </p>
       </div>
 

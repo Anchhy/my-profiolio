@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { ArrowRight, BookOpen, Braces, Check, ChevronRight, Code2, FileText, GraduationCap, Layers3, Route, Search, Sparkles } from 'lucide-vue-next'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import { courses, coursesBySlug, recommendedPath } from '../data/learning'
 
-const previousTitle = document.title
 const activeCategory = ref('All')
 const searchQuery = ref('')
 const categories = ['All', 'Foundation', 'Frontend', 'Backend', 'Language']
@@ -20,13 +19,6 @@ const visibleCourses = computed(() => {
 
 const pathCourses = recommendedPath.map((slug) => coursesBySlug[slug])
 
-onMounted(() => {
-  document.title = 'Learn Web Development — Et Anchhy'
-})
-
-onUnmounted(() => {
-  document.title = previousTitle
-})
 </script>
 
 <template>

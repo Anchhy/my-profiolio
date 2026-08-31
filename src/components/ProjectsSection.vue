@@ -26,7 +26,7 @@ const visibleProjects = computed(() =>
           <h2 class="section-title">Proof through <span class="accent-underline">projects.</span></h2>
         </div>
         <p class="section-copy">
-          A selection of products where I practiced architecture, teamwork, and solving real workflow problems.
+          Case studies showing how I approach product architecture, real-time behavior, secure workflows, and collaborative delivery.
         </p>
       </div>
 
@@ -90,10 +90,16 @@ const visibleProjects = computed(() =>
             </div>
 
             <div class="project-actions">
-              <button type="button" class="project-detail-button" @click="selectedProject = project">
+              <button
+                type="button"
+                class="project-detail-button"
+                aria-haspopup="dialog"
+                :aria-label="`View ${project.title} project details`"
+                @click="selectedProject = project"
+              >
                 View details <ArrowUpRight :size="15" />
               </button>
-              <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="Open live demo">
+              <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-icon-link" :aria-label="`Open ${project.title} live demo`">
                 <ExternalLink :size="17" />
               </a>
               <a
@@ -102,7 +108,7 @@ const visibleProjects = computed(() =>
                 target="_blank"
                 rel="noopener noreferrer"
                 class="project-icon-link"
-                aria-label="Open source code on GitHub"
+                :aria-label="`Open ${project.title} source code on GitHub`"
               >
                 <Github :size="17" />
               </a>

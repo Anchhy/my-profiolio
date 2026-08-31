@@ -61,7 +61,14 @@ onUnmounted(() => {
   <Teleport to="body">
     <Transition name="modal">
       <div v-if="project" class="modal-backdrop" @mousedown.self="close">
-        <section ref="modalElement" class="project-modal" role="dialog" aria-modal="true" :aria-labelledby="`project-${project.title.replace(/\W/g, '-')}`">
+        <section
+          ref="modalElement"
+          class="project-modal"
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="`project-${project.title.replace(/\W/g, '-')}`"
+          :aria-describedby="`project-${project.title.replace(/\W/g, '-')}-description`"
+        >
           <button ref="closeButton" type="button" class="modal-close" aria-label="Close project details" @click="close">
             <X :size="20" />
           </button>
@@ -75,7 +82,7 @@ onUnmounted(() => {
           <div class="modal-content">
             <div>
               <h3>Project overview</h3>
-              <p>{{ project.description }}</p>
+              <p :id="`project-${project.title.replace(/\W/g, '-')}-description`">{{ project.description }}</p>
             </div>
             <div class="modal-contribution">
               <h3>My contribution</h3>

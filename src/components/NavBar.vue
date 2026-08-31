@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ArrowUpRight, BookOpen, Menu, Moon, Sun, X } from 'lucide-vue-next'
 import { useDarkMode } from '../composables/useDarkMode'
@@ -10,6 +10,8 @@ const router = useRouter()
 
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
+const mobileToggle = ref<HTMLButtonElement | null>(null)
+const mobileMenu = ref<HTMLElement | null>(null)
 const activeSection = ref('hero')
 const scrollProgress = ref(0)
 const isLearningPage = computed(() => route.path.startsWith('/learn'))
@@ -52,8 +54,26 @@ const scrollTo = async (href: string) => {
 }
 
 const handleKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Escape') isMobileMenuOpen.value = false
+  if (event.key === 'Escape' && isMobileMenuOpen.value) {
+    isMobileMenuOpen.value = false
+    void nextTick(() => mobileToggle.value?.focus())
+  }
 }
+
+watch(isMobileMenuOpen, async (isOpen) => {
+  document.body.style.overflow = isOpen ? 'hidden' : ''
+  if (isOpen) {
+    await nextTick()
+    mobileMenu.value?.querySelector<HTMLElement>('a[href]')?.focus()
+  }
+})
+
+watch(
+  () => route.fullPath,
+  () => {
+    isMobileMenuOpen.value = false
+  },
+)
 
 onMounted(() => {
   handleScroll()
@@ -62,6 +82,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  document.body.style.overflow = ''
   window.removeEventListener('scroll', handleScroll)
   window.removeEventListener('keydown', handleKeydown)
 })
@@ -123,6 +144,7 @@ onUnmounted(() => {
         </a>
 
         <button
+          ref="mobileToggle"
           class="icon-button nav-mobile-toggle lg:hidden"
           type="button"
           aria-controls="mobile-navigation"
@@ -141,7 +163,7 @@ onUnmounted(() => {
     </nav>
 
     <Transition name="menu">
-      <div v-if="isMobileMenuOpen" id="mobile-navigation" class="mobile-menu mx-auto mt-2 max-w-7xl lg:hidden">
+      <div v-if="isMobileMenuOpen" id="mobile-navigation" ref="mobileMenu" class="mobile-menu mx-auto mt-2 max-w-7xl lg:hidden">
         <a href="/#hero" class="mobile-link" @click.prevent="scrollTo('#hero')">Home</a>
         <a
           v-for="link in navLinks"

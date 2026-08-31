@@ -32,13 +32,13 @@ const principles = [
           <p class="section-kicker">01 / About</p>
           <h2 class="section-title">Curious by nature.<br /><span class="accent-underline">Practical by choice.</span></h2>
           <p class="section-copy mt-7">
-            I’m an Information & Communication Engineering student who enjoys taking a product from a rough idea to a useful, working experience.
+            I’m a fifth-year Information & Communication Engineering student who enjoys taking a product from a rough idea to a useful, working experience.
           </p>
         </div>
 
         <div class="about-content">
           <p class="about-lead">
-            My favorite work lives where thoughtful interfaces meet well-structured backend systems.
+            My strongest work connects thoughtful interfaces with secure, well-structured backend systems.
           </p>
           <div class="about-checklist">
             <div v-for="point in aboutPoints" :key="point" class="about-check">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUp, Github, Mail } from 'lucide-vue-next'
+import { ArrowUp, Github, Mail, Send } from 'lucide-vue-next'
 import { personalInfo } from '../data/portfolio'
 
 const currentYear = new Date().getFullYear()
@@ -25,6 +25,7 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
       <div class="footer-actions">
         <a :href="personalInfo.socialLinks.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github :size="17" /></a>
+        <a :href="personalInfo.socialLinks.telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><Send :size="17" /></a>
         <a :href="`mailto:${personalInfo.socialLinks.email}`" aria-label="Email"><Mail :size="17" /></a>
         <button type="button" aria-label="Back to top" @click="scrollToTop"><ArrowUp :size="17" /></button>
       </div>

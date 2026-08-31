@@ -48,11 +48,21 @@
 
       header {
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8mm;
-        align-items: end;
+        grid-template-columns: 25mm 1fr auto;
+        gap: 6mm;
+        align-items: center;
         padding-bottom: 5mm;
         border-bottom: 1.5px solid var(--accent);
+      }
+
+      .profile-photo {
+        display: block;
+        width: 25mm;
+        height: 32mm;
+        border: 1px solid var(--line);
+        border-radius: 2.5mm;
+        object-fit: cover;
+        object-position: center 18%;
       }
 
       h1 {
@@ -262,6 +272,13 @@
   <body>
     <main class="page">
       <header>
+        <img
+          class="profile-photo"
+          src="../src/assets/mypic.webp"
+          alt="Portrait of Et Anchhy"
+          width="295"
+          height="378"
+        />
         <div>
           <h1>Et Anchhy</h1>
           <p class="role">Full-Stack Web Developer</p>
@@ -272,11 +289,12 @@
           <a href="mailto:etanchhy@gmail.com">etanchhy@gmail.com</a>
           <a href="https://et-anchhy.me">et-anchhy.me</a>
           <a href="https://github.com/Anchhy">github.com/Anchhy</a>
+          <a href="https://t.me/anchhyet">t.me/anchhyet</a>
         </address>
       </header>
 
       <p class="summary">
-        Fourth-year Information &amp; Communication Engineering student, full-stack developer, and Backend Developer Intern at the Cambodia Council of Nurses. Experienced in building secure NestJS APIs, authentication and notification workflows, responsive interfaces, relational databases, real-time systems, testing, and collaborative Git workflows.
+        Fifth-year Information &amp; Communication Engineering student, full-stack developer, and Backend Developer Intern at the Cambodia Council of Nurses. Experienced in secure NestJS APIs, authentication and notification workflows, responsive interfaces, relational databases, real-time systems, testing, and collaborative Git delivery.
       </p>
 
       <div class="layout">
@@ -286,7 +304,7 @@
             <p class="degree">Engineer Degree Program</p>
             <p>Information &amp; Communication Engineering</p>
             <p class="institution">Institute of Technology of Cambodia</p>
-            <p class="date">2022 — Present · Year 4</p>
+            <p class="date">2022 — Present · Year 5</p>
           </section>
 
           <section>
@@ -342,7 +360,7 @@
             <article class="project">
               <div class="project-heading">
                 <h3>SkillBridge-KH</h3>
-                <a class="project-link" href="https://github.com/Anchhy/skill-bridge-frontend">GitHub ↗</a>
+                <span class="project-link">Full-stack project</span>
               </div>
               <p class="stack">Angular 22 · NestJS 11 · TypeScript · Prisma 7 · PostgreSQL 17 · Docker</p>
               <ul>
@@ -365,19 +383,19 @@
 
             <article class="project">
               <div class="project-heading">
-                <h3>NearMe Social <span style="color: var(--muted); font-size: 8.4pt; font-weight: 400">— Team project</span></h3>
-                <a class="project-link" href="https://github.com/NearMe-Social/nms_frontend">GitHub ↗</a>
+                <h3>EnglishPath</h3>
+                <a class="project-link" href="https://github.com/et-anchhy/start-english">GitHub ↗</a>
               </div>
-              <p class="stack">Vue 3 · NestJS · PostgreSQL · TypeORM</p>
+              <p class="stack">Vue 3 · Pinia · NestJS · Prisma · PostgreSQL · TypeScript · Docker</p>
               <ul>
-                <li>Built notification backend architecture and core social interfaces for a location-based community platform.</li>
-                <li>Implemented private chat, post and discussion experiences, real-time notifications, reporting, blocking, and administration tools.</li>
+                <li>Built a free adaptive English-learning platform with CEFR placement, personalized learning paths, multi-skill lessons, progress tracking, vocabulary, and achievements.</li>
+                <li>Developed secure authentication, rotating refresh sessions, curriculum and mastery data, responsive learner workflows, automated tests, and production deployment configuration.</li>
               </ul>
             </article>
 
           </section>
 
-          <footer>Open to junior full-stack and backend opportunities · References available upon request</footer>
+          <footer>Open to junior full-stack and backend roles · References available upon request</footer>
         </div>
       </div>
     </main>

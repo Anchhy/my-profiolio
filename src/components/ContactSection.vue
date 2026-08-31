@@ -32,10 +32,10 @@ const submitContact = () => {
     <div ref="elementRef" class="reveal mx-auto max-w-7xl">
       <div class="contact-panel">
         <div class="contact-intro">
-          <p class="contact-kicker">05 / Let’s connect</p>
+          <p class="contact-kicker">06 / Let’s connect</p>
           <h2>Have a role or project in mind?</h2>
           <p>
-            I’m open to web development internships and thoughtful collaborations. Tell me what you’re building or where I could contribute.
+            I’m open to junior full-stack and backend roles, as well as thoughtful collaborations. Tell me what you’re building or where I could contribute.
           </p>
 
           <div class="contact-details">
@@ -48,6 +48,9 @@ const submitContact = () => {
             </div>
             <a :href="personalInfo.socialLinks.github" target="_blank" rel="noopener noreferrer">
               <Github :size="18" /><span><small>GitHub</small>@Anchhy</span><ArrowUpRight :size="15" />
+            </a>
+            <a :href="personalInfo.socialLinks.telegram" target="_blank" rel="noopener noreferrer">
+              <Send :size="18" /><span><small>Telegram</small>@anchhyet</span><ArrowUpRight :size="15" />
             </a>
             <a :href="`tel:${personalInfo.socialLinks.phone.replace(/\s/g, '')}`">
               <Phone :size="18" /><span><small>Phone</small>{{ personalInfo.socialLinks.phone }}</span>

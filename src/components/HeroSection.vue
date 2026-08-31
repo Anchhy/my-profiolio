@@ -9,8 +9,8 @@ import {
   Mail,
   MapPin,
 } from 'lucide-vue-next'
-import { personalInfo } from '../data/portfolio'
-import profilePhoto from '../assets/mypic.jpg'
+import { personalInfo, projects } from '../data/portfolio'
+import profilePhoto from '../assets/mypic.webp'
 
 const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 </script>
@@ -30,8 +30,8 @@ const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ b
 
         <p class="hero-kicker">Hello, I’m {{ personalInfo.name }}</p>
         <h1 class="hero-title">
-          I build digital products that feel
-          <span class="hero-title-accent">clear & dependable.</span>
+          I build full-stack products
+          <span class="hero-title-accent">from interface to API.</span>
         </h1>
 
         <p class="hero-copy">{{ personalInfo.intro }}</p>
@@ -59,9 +59,9 @@ const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ b
         </div>
 
         <div class="hero-proof" aria-label="Portfolio highlights">
-          <div><strong>5</strong><span>Featured<br />projects</span></div>
-          <div><strong>4th</strong><span>Year ICE<br />student</span></div>
-          <div><strong>FE→BE</strong><span>End-to-end<br />thinking</span></div>
+          <div><strong>{{ projects.length }}</strong><span>Selected<br />projects</span></div>
+          <div><strong>5th</strong><span>Year ICE<br />student</span></div>
+          <div><strong>CCN</strong><span>Backend<br />internship</span></div>
         </div>
       </div>
 

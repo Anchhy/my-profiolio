@@ -16,8 +16,10 @@ export function useScrollAnimation(options?: IntersectionObserverInit) {
         })
       },
       {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px',
+        // Long mobile sections can never place 15% of their full height in the viewport.
+        // A small threshold keeps the reveal reliable without firing before content is nearby.
+        threshold: 0.05,
+        rootMargin: '0px 0px -40px 0px',
         ...options,
       }
     )

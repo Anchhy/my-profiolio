@@ -1,4 +1,6 @@
-import flowStateImage from '../assets/flowstate.png'
+import ccnImage from '../assets/ccn.webp'
+import englishPathImage from '../assets/englishpath.webp'
+import flowStateImage from '../assets/flowstate.webp'
 import skillBridgeImage from '../assets/skillbridge-kh.png'
 
 // ────────── Personal Info ──────────
@@ -11,6 +13,7 @@ export interface PersonalInfo {
   resumeUrl?: string
   socialLinks: {
     github: string
+    telegram: string
     email: string
     phone: string
   }
@@ -20,12 +23,13 @@ export const personalInfo: PersonalInfo = {
   name: 'Et Anchhy',
   title: 'Full-Stack Web Developer',
   intro:
-    'I build clear interfaces and dependable APIs, with hands-on backend experience in authentication, workflow, and notification systems.',
+    'I’m a fifth-year engineering student and full-stack developer building clear interfaces, dependable APIs, and secure workflow-driven systems.',
   location: 'Phnom Penh, Cambodia',
-  availability: 'Open to junior developer opportunities',
+  availability: 'Open to junior full-stack and backend roles',
   resumeUrl: '/Et-Anchhy-Resume.pdf',
   socialLinks: {
     github: 'https://github.com/Anchhy',
+    telegram: 'https://t.me/anchhyet',
     email: 'etanchhy@gmail.com',
     phone: '+855 93610886',
   },
@@ -33,16 +37,15 @@ export const personalInfo: PersonalInfo = {
 
 // ────────── About ──────────
 export const aboutPoints: string[] = [
-  'Year 4 Information & Communication Engineering student at ITC.',
+  'Fifth-year Information & Communication Engineering student at ITC.',
   'Backend Developer Intern contributing to the Cambodia Council of Nurses platform.',
-  'Hands-on experience with secure authentication, workflow APIs, and real-time notifications.',
+  'Hands-on experience with secure authentication, workflow APIs, relational data, and real-time systems.',
   'Comfortable working across frontend, backend, relational databases, and collaborative Git workflows.',
 ]
 
 // ────────── Skills ──────────
 export interface Skill {
   name: string
-  level: number // 0-100
 }
 
 export interface SkillCategory {
@@ -56,48 +59,52 @@ export const skillCategories: SkillCategory[] = [
     title: 'Frontend',
     icon: 'monitor',
     skills: [
-      { name: 'HTML5', level: 90 },
-      { name: 'CSS3', level: 85 },
-      { name: 'JavaScript', level: 85 },
-      { name: 'TypeScript', level: 80 },
-      { name: 'Vue 3', level: 85 },
-      { name: 'Tailwind CSS', level: 80 },
+      { name: 'TypeScript' },
+      { name: 'Vue 3' },
+      { name: 'Angular' },
+      { name: 'React' },
+      { name: 'JavaScript' },
+      { name: 'Tailwind CSS' },
+      { name: 'Responsive UI' },
+      { name: 'Accessibility' },
     ],
   },
   {
     title: 'Backend',
     icon: 'server',
     skills: [
-      { name: 'Java', level: 75 },
-      { name: 'Spring Boot', level: 72 },
-      { name: 'Node.js', level: 80 },
-      { name: 'NestJS', level: 82 },
-      { name: 'Laravel', level: 70 },
-      { name: 'REST API', level: 85 },
-      { name: 'Sequelize', level: 78 },
-      { name: 'TypeORM', level: 75 },
-      { name: 'JWT Authentication', level: 78 },
+      { name: 'NestJS' },
+      { name: 'Node.js' },
+      { name: 'REST API design' },
+      { name: 'Spring Boot' },
+      { name: 'Java' },
+      { name: 'Socket.IO' },
+      { name: 'JWT & RBAC' },
     ],
   },
   {
     title: 'Database',
     icon: 'database',
     skills: [
-      { name: 'PostgreSQL', level: 80 },
-      { name: 'MySQL', level: 75 },
+      { name: 'PostgreSQL' },
+      { name: 'MySQL' },
+      { name: 'Prisma' },
+      { name: 'Sequelize' },
+      { name: 'TypeORM' },
+      { name: 'Database migrations' },
     ],
   },
   {
     title: 'DevOps & Tools',
     icon: 'wrench',
     skills: [
-      { name: 'Git', level: 85 },
-      { name: 'GitHub', level: 85 },
-      { name: 'Docker', level: 70 },
-      { name: 'Jenkins', level: 68 },
-      { name: 'Postman', level: 80 },
-      { name: 'Linux', level: 75 },
-      { name: 'VS Code', level: 90 },
+      { name: 'Git & GitHub' },
+      { name: 'Docker' },
+      { name: 'Jest' },
+      { name: 'Postman' },
+      { name: 'Linux' },
+      { name: 'Jenkins' },
+      { name: 'Vite' },
     ],
   },
 ]
@@ -112,6 +119,8 @@ export interface Experience {
   summary: string
   achievements: string[]
   techStack: string[]
+  imageUrl?: string
+  imageAlt?: string
 }
 
 export const experience: Experience[] = [
@@ -123,6 +132,8 @@ export const experience: Experience[] = [
     location: 'Phnom Penh, Cambodia',
     summary:
       'Contributing to a production-oriented nursing council platform with a focus on API reliability, authentication, authorization, and notification workflows.',
+    imageUrl: ccnImage,
+    imageAlt: 'Cambodian Council of Nurses web platform login interface',
     achievements: [
       'Developed and maintained NestJS REST APIs for login, OTP verification, password recovery, session validation, and role-based access.',
       'Improved personal and actionable-work notifications across workflow, CPD, and Presentation processes, including unread counts and read-state handling.',
@@ -153,6 +164,47 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'SkillBridge-KH',
+    eyebrow: 'Student opportunity platform',
+    category: 'Full stack',
+    description:
+      'A student-focused platform that connects Cambodian university students with internships, project teammates, and beginner-friendly freelance opportunities.',
+    contribution:
+      'Designed and built the Angular frontend and NestJS API, including secure role-based workflows, marketplace discovery, applications, team collaboration, administration, and production-ready deployment infrastructure.',
+    features: [
+      'Internship discovery, saving, applications, and interview scheduling',
+      'Student project teammate matching, tasks, and milestones',
+      'Beginner freelance jobs, proposals, deliverables, and reviews',
+      'Student, company, client, and administrator roles',
+      'Secure JWT sessions with rotating HttpOnly refresh cookies',
+      'Notifications, reporting, moderation, and audit records',
+      'Responsive Angular interface with unified search and dashboards',
+    ],
+    techStack: ['Angular 22', 'NestJS 11', 'TypeScript', 'Prisma 7', 'PostgreSQL 17', 'Docker'],
+    imageUrl: skillBridgeImage,
+  },
+  {
+    title: 'EnglishPath',
+    eyebrow: 'Free adaptive English-learning platform',
+    category: 'Full stack',
+    description:
+      'A free English-learning platform that helps learners find their CEFR level, follow a personalized path, practice skills, and track progress from Pre-A1 through C2.',
+    contribution:
+      'Designed and built the Vue learner experience and NestJS API, including adaptive placement scoring, secure authentication, curriculum data, progress and mastery tracking, automated tests, and deployment configuration.',
+    features: [
+      'Adaptive Pre-A1–C2 placement assessment',
+      'Personalized learning roadmap and lesson player',
+      'Listening, speaking, reading, and writing practice',
+      'Progress, mastery, vocabulary, and achievements',
+      'Secure rotating refresh-token sessions',
+      'Responsive learner dashboard and onboarding',
+      'Free access with no ads, subscriptions, or paid API keys',
+    ],
+    techStack: ['Vue 3', 'Pinia', 'NestJS', 'Prisma', 'PostgreSQL', 'TypeScript', 'Docker', 'Playwright'],
+    githubUrl: 'https://github.com/et-anchhy/start-english',
+    imageUrl: englishPathImage,
+  },
+  {
     title: 'FlowState',
     eyebrow: 'Focus and productivity app',
     category: 'Frontend',
@@ -171,30 +223,7 @@ export const projects: Project[] = [
     ],
     techStack: ['React 19', 'Vite', 'Zustand', 'Framer Motion', 'Web Audio API', 'LocalStorage'],
     githubUrl: 'https://github.com/et-anchhy/FlowState',
-    liveUrl: 'http://flowstate.et-anchhy.me/',
     imageUrl: flowStateImage,
-  },
-  {
-    title: 'SkillBridge-KH',
-    eyebrow: 'Student opportunity platform',
-    category: 'Full stack',
-    description:
-      'A student-focused platform that connects Cambodian university students with internships, project teammates, and beginner-friendly freelance opportunities.',
-    contribution:
-      'Designed and built the Angular frontend and NestJS API, including secure role-based workflows, marketplace discovery, applications, team collaboration, administration, and production-ready deployment infrastructure.',
-    features: [
-      'Internship discovery, saving, applications, and interview scheduling',
-      'Student project teammate matching, tasks, and milestones',
-      'Beginner freelance jobs, proposals, deliverables, and reviews',
-      'Student, company, client, and administrator roles',
-      'Secure JWT sessions with rotating HttpOnly refresh cookies',
-      'Notifications, reporting, moderation, and audit records',
-      'Responsive Angular interface with unified search and dashboards',
-    ],
-    techStack: ['Angular 22', 'NestJS 11', 'TypeScript', 'Prisma 7', 'PostgreSQL 17', 'Docker'],
-    githubFrontendUrl: 'https://github.com/Anchhy/skill-bridge-frontend',
-    githubBackendUrl: 'https://github.com/Anchhy/skill-bridge-backend',
-    imageUrl: skillBridgeImage,
   },
   {
     title: 'NearMe Social',
@@ -279,9 +308,9 @@ export const education: Education[] = [
     institution: 'Institute of Technology of Cambodia (ITC)',
     degree: 'Engineer Degree Program',
     field: 'Information & Communication Engineering',
-    status: 'Year 4 Student',
+    status: 'Fifth-Year Student',
     years: '2022 – Present',
     description:
-      'Studying core engineering concepts including software development, networking, and system design with a focus on web technologies.',
+      'Completing an engineering curriculum spanning software development, networking, and system design, with a practical focus on full-stack web systems.',
   },
 ]

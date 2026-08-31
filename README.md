@@ -9,16 +9,19 @@ A modern, responsive personal portfolio website built with **Vue 3**, **Vite**, 
 
 ## ✨ Features
 
+- 💼 **Recruiter-Focused Profile** — Fifth-year status, CCN internship evidence, availability, and focused project outcomes
 - 🎨 **Dark / Light Mode** — Persistent toggle with system-preference fallback
 - 🗂️ **Project Filtering** — Filter featured work by technical focus
 - 🧾 **Project Case Studies** — Accessible detail dialogs with contributions, features, and links
+- 🎓 **Free Learning Center** — Seven practical courses with lessons, examples, quizzes, projects, and cheat sheets
 - ✉️ **Contact Composer** — Validated form that prepares a complete email enquiry
-- 🖨️ **Printable Résumé** — Print-optimized profile that can be saved as PDF
+- 🖨️ **Downloadable Résumé** — One-page A4 PDF with profile photo, experience, projects, and contact links
 - 📱 **Mobile-First Design** — Fully responsive with hamburger menu
 - 🎯 **Scroll Spy Navigation** — Active section highlighting in navbar
 - 📈 **Reading Progress** — Subtle page-progress indicator in the navigation
-- ♿ **Accessible** — Semantic HTML, ARIA labels, keyboard-friendly
-- 🔍 **SEO Optimized** — Meta tags, Open Graph, structured headings
+- ♿ **Accessible** — Semantic HTML, ARIA labels, focus management, and keyboard-friendly interactions
+- 🔍 **SEO and Sharing** — Route-aware metadata, structured data, canonical URLs, and a custom social card
+- 🧭 **Resilient Routing** — Branded 404 page and a static-host SPA fallback
 
 ## 🗂️ Project Structure
 
@@ -29,6 +32,7 @@ src/
 │   ├── NavBar.vue            # Sticky navbar + dark mode toggle
 │   ├── HeroSection.vue       # Hero + print résumé action
 │   ├── AboutSection.vue      # About + working principles
+│   ├── ExperienceSection.vue # CCN internship experience
 │   ├── SkillsSection.vue     # Skill categories
 │   ├── ProjectsSection.vue   # Filterable project showcase
 │   ├── ProjectModal.vue      # Accessible project case-study dialog
@@ -39,22 +43,31 @@ src/
 │   ├── useDarkMode.ts        # Dark/light mode composable
 │   └── useScrollAnimation.ts # Intersection Observer composable
 ├── data/
-│   └── portfolio.ts          # All portfolio data objects
+│   ├── portfolio.ts          # Portfolio content and project data
+│   └── learning.ts           # Course, quiz, and cheat-sheet data
 ├── layouts/
 │   └── DefaultLayout.vue     # Main layout wrapper
 ├── router/
-│   └── index.ts              # Vue Router with smooth scroll
+│   └── index.ts              # Routes, smooth scroll, and page metadata
 ├── views/
-│   └── HomeView.vue          # Main page composing all sections
+│   ├── HomeView.vue          # Main portfolio page
+│   ├── LearningHubView.vue   # Course catalog and filters
+│   ├── CourseLearningView.vue # Reusable course experience
+│   ├── NestJsLearningView.vue # Extended NestJS learning path
+│   └── NotFoundView.vue      # Branded 404 route
 ├── App.vue                   # Root component
 └── main.ts                   # Entry point
+
+resume/                       # Editable HTML résumé source
+social/                       # Editable 1200×630 social-card source
+public/                       # PDF résumé, social image, and custom domain
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js ≥ 18
+- Node.js ^20.19.0 or ≥22.12.0
 - npm ≥ 9
 
 ### Install & Run
@@ -105,21 +118,11 @@ netlify deploy --prod --dir=dist
 
 Or drag-and-drop the `dist/` folder at [app.netlify.com](https://app.netlify.com).
 
-### GitHub Pages
+### Static hosting and GitHub Pages
 
-1. Install the plugin:
-   ```bash
-   npm install -D vite-plugin-gh-pages
-   ```
-2. Set `base` in `vite.config.ts`:
-   ```ts
-   base: '/your-repo-name/'
-   ```
-3. Build and deploy:
-   ```bash
-   npm run build
-   npx gh-pages -d dist
-   ```
+`npm run build` creates the deployable `dist/` folder and copies the app shell to
+`dist/404.html`, so direct links such as `/learn/vue` work on static hosts. The
+custom domain is defined in `public/CNAME`; update that file if the domain changes.
 
 ## 🛠️ Tech Stack
 

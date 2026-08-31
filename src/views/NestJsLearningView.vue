@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import {
   ArrowLeft,
   ArrowRight,
@@ -34,7 +34,6 @@ import { coursesBySlug } from '../data/learning'
 
 type ExampleKey = 'controller' | 'service' | 'module' | 'dto'
 
-const previousTitle = document.title
 const activeExample = ref<ExampleKey>('controller')
 const copiedExample = ref<ExampleKey | null>(null)
 const selectedAnswers = ref<Record<number, number>>({})
@@ -264,13 +263,6 @@ const toggleStep = (index: number) => {
     : [...completedSteps.value, index]
 }
 
-onMounted(() => {
-  document.title = 'Learn NestJS — Et Anchhy'
-})
-
-onUnmounted(() => {
-  document.title = previousTitle
-})
 </script>
 
 <template>
@@ -331,7 +323,7 @@ onUnmounted(() => {
           </a>
         </aside>
 
-        <main class="lesson-content">
+        <div class="lesson-content">
           <section id="mental-model" class="lesson-section">
             <p class="lesson-number">01 · Start here</p>
             <h2>One simple mental model</h2>
@@ -592,7 +584,7 @@ onUnmounted(() => {
               <code>nest new tasks-api --strict</code>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   </DefaultLayout>

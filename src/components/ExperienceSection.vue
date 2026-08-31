@@ -31,6 +31,18 @@ const { elementRef } = useScrollAnimation()
           <p class="experience-organization">{{ item.organization }}</p>
           <p class="experience-summary">{{ item.summary }}</p>
 
+          <figure v-if="item.imageUrl" class="experience-visual">
+            <img
+              :src="item.imageUrl"
+              :alt="item.imageAlt || `${item.organization} platform interface`"
+              width="1600"
+              height="974"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>CCN web platform</figcaption>
+          </figure>
+
           <ul class="experience-achievements">
             <li v-for="achievement in item.achievements" :key="achievement">
               <span><Check :size="13" /></span>
