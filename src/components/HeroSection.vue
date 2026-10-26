@@ -65,9 +65,9 @@ const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ b
         </div>
       </div>
 
-      <figure class="hero-portrait-wrap">
+      <div class="hero-portrait-wrap">
         <div class="portrait-accent" aria-hidden="true"></div>
-        <div class="portrait-frame">
+        <figure class="portrait-frame">
           <img
             :src="profilePhoto"
             alt="Et Anchhy, full-stack web developer"
@@ -83,7 +83,7 @@ const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ b
             <span>Based in Phnom Penh</span>
             <strong>{{ personalInfo.title }}</strong>
           </figcaption>
-        </div>
+        </figure>
 
         <div class="hero-tech-card hero-tech-card-left">
           <span><Code2 :size="17" /></span>
@@ -93,7 +93,7 @@ const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ b
           <span><Database :size="17" /></span>
           <div><small>Backend</small><strong>NestJS · Spring</strong></div>
         </div>
-      </figure>
+      </div>
     </div>
 
     <button class="hero-scroll-cue" type="button" aria-label="Scroll to about section" @click="scrollTo('about')">

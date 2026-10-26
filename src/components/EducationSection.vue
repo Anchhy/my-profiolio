@@ -29,7 +29,7 @@ const { elementRef } = useScrollAnimation()
         </div>
         <div class="education-meta">
           <span><CalendarDays :size="15" /> {{ edu.years }}</span>
-          <span><MapPin :size="15" /> Phnom Penh, Cambodia</span>
+          <span><MapPin :size="15" /> {{ edu.location }}</span>
         </div>
       </div>
     </div>

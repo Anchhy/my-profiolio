@@ -10,11 +10,21 @@ const activeFilter = ref('All')
 const selectedProject = ref<Project | null>(null)
 
 const filters = ['All', ...new Set(projects.map((project) => project.category))]
-const visibleProjects = computed(() =>
-  projects
+const artVariantCount = 4
+
+const visibleProjects = computed(() => {
+  const showFeatured = activeFilter.value === 'All'
+  const matching = projects
     .map((project, index) => ({ project, index }))
-    .filter(({ project }) => activeFilter.value === 'All' || project.category === activeFilter.value),
-)
+    .filter(({ project }) => showFeatured || project.category === activeFilter.value)
+
+  return matching.map((item, visibleIndex) => {
+    // The featured card fills a whole row, so every card after it starts one slot later.
+    const slot = showFeatured ? visibleIndex + 1 : visibleIndex
+    const isLastAlone = visibleIndex === matching.length - 1 && slot % 2 === 0
+    return { ...item, isWide: (showFeatured && visibleIndex === 0) || isLastAlone }
+  })
+})
 </script>
 
 <template>
@@ -49,14 +59,14 @@ const visibleProjects = computed(() =>
 
       <TransitionGroup name="project-grid" tag="div" class="projects-grid">
         <article
-          v-for="({ project, index }, visibleIndex) in visibleProjects"
+          v-for="{ project, index, isWide } in visibleProjects"
           :key="project.title"
           class="project-card"
-          :class="{ 'project-card-featured': visibleIndex === 0 && activeFilter === 'All' }"
+          :class="{ 'project-card-wide': isWide }"
         >
           <div
             class="project-art"
-            :class="[`project-art-${index + 1}`, { 'project-art-with-image': project.imageUrl }]"
+            :class="[`project-art-${(index % artVariantCount) + 1}`, { 'project-art-with-image': project.imageUrl }]"
           >
             <img
               v-if="project.imageUrl"
@@ -64,11 +74,12 @@ const visibleProjects = computed(() =>
               :alt="`${project.title} interface preview`"
               class="project-preview-image"
               loading="lazy"
+              decoding="async"
             />
             <div v-else class="project-browser" aria-hidden="true">
               <div class="browser-bar"><i></i><i></i><i></i><span>{{ project.eyebrow }}</span></div>
               <div class="browser-content">
-                <span class="browser-label">PROJECT 0{{ index + 1 }}</span>
+                <span class="browser-label">PROJECT {{ String(index + 1).padStart(2, '0') }}</span>
                 <strong>{{ project.title }}</strong>
                 <div class="browser-lines"><i></i><i></i><i></i></div>
               </div>
@@ -94,10 +105,9 @@ const visibleProjects = computed(() =>
                 type="button"
                 class="project-detail-button"
                 aria-haspopup="dialog"
-                :aria-label="`View ${project.title} project details`"
                 @click="selectedProject = project"
               >
-                View details <ArrowUpRight :size="15" />
+                View details<span class="sr-only"> for {{ project.title }}</span> <ArrowUpRight :size="15" />
               </button>
               <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-icon-link" :aria-label="`Open ${project.title} live demo`">
                 <ExternalLink :size="17" />

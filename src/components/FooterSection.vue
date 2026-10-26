@@ -19,6 +19,7 @@ const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
         <RouterLink :to="{ name: 'home', hash: '#experience' }">Experience</RouterLink>
         <RouterLink :to="{ name: 'home', hash: '#projects' }">Work</RouterLink>
         <RouterLink :to="{ name: 'home', hash: '#skills' }">Skills</RouterLink>
+        <RouterLink :to="{ name: 'home', hash: '#education' }">Education</RouterLink>
         <RouterLink to="/learn">Learn</RouterLink>
         <RouterLink :to="{ name: 'home', hash: '#contact' }">Contact</RouterLink>
       </nav>

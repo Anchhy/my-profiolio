@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
 import { ArrowUpRight, Check, ExternalLink, Github, X } from 'lucide-vue-next'
 import type { Project } from '../data/portfolio'
 
@@ -8,6 +8,12 @@ const emit = defineEmits<{ close: [] }>()
 const closeButton = ref<HTMLButtonElement | null>(null)
 const modalElement = ref<HTMLElement | null>(null)
 let previouslyFocused: HTMLElement | null = null
+
+const titleId = computed(() => (props.project ? `project-${props.project.title.replace(/\W/g, '-')}` : ''))
+const hasLinks = computed(() => {
+  const project = props.project
+  return Boolean(project && (project.liveUrl || project.githubUrl || project.githubFrontendUrl || project.githubBackendUrl))
+})
 
 const close = () => emit('close')
 
@@ -66,23 +72,27 @@ onUnmounted(() => {
           class="project-modal"
           role="dialog"
           aria-modal="true"
-          :aria-labelledby="`project-${project.title.replace(/\W/g, '-')}`"
-          :aria-describedby="`project-${project.title.replace(/\W/g, '-')}-description`"
+          :aria-labelledby="titleId"
+          :aria-describedby="`${titleId}-description`"
         >
           <button ref="closeButton" type="button" class="modal-close" aria-label="Close project details" @click="close">
             <X :size="20" />
           </button>
 
+          <figure v-if="project.imageUrl" class="modal-preview">
+            <img :src="project.imageUrl" :alt="`${project.title} interface preview`" decoding="async" />
+          </figure>
+
           <div class="modal-header">
             <p>{{ project.eyebrow }} · {{ project.category }}</p>
-            <h2 :id="`project-${project.title.replace(/\W/g, '-')}`">{{ project.title }}</h2>
+            <h2 :id="titleId">{{ project.title }}</h2>
             <span v-if="project.teamInfo">{{ project.teamInfo }}</span>
           </div>
 
           <div class="modal-content">
             <div>
               <h3>Project overview</h3>
-              <p :id="`project-${project.title.replace(/\W/g, '-')}-description`">{{ project.description }}</p>
+              <p :id="`${titleId}-description`">{{ project.description }}</p>
             </div>
             <div class="modal-contribution">
               <h3>My contribution</h3>
@@ -100,7 +110,7 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="modal-actions">
+          <div v-if="hasLinks" class="modal-actions">
             <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener noreferrer" class="btn-primary">
               <ExternalLink :size="17" /> Live demo <ArrowUpRight :size="14" />
             </a>

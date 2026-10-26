@@ -8,6 +8,7 @@ const { elementRef } = useScrollAnimation()
 const copied = ref(false)
 const statusMessage = ref('')
 const form = reactive({ name: '', email: '', message: '' })
+const handleFrom = (url: string) => `@${url.split('/').filter(Boolean).at(-1)}`
 
 const copyEmail = async () => {
   try {
@@ -47,10 +48,10 @@ const submitContact = () => {
               </button>
             </div>
             <a :href="personalInfo.socialLinks.github" target="_blank" rel="noopener noreferrer">
-              <Github :size="18" /><span><small>GitHub</small>@Anchhy</span><ArrowUpRight :size="15" />
+              <Github :size="18" /><span><small>GitHub</small>{{ handleFrom(personalInfo.socialLinks.github) }}</span><ArrowUpRight :size="15" />
             </a>
             <a :href="personalInfo.socialLinks.telegram" target="_blank" rel="noopener noreferrer">
-              <Send :size="18" /><span><small>Telegram</small>@anchhyet</span><ArrowUpRight :size="15" />
+              <Send :size="18" /><span><small>Telegram</small>{{ handleFrom(personalInfo.socialLinks.telegram) }}</span><ArrowUpRight :size="15" />
             </a>
             <a :href="`tel:${personalInfo.socialLinks.phone.replace(/\s/g, '')}`">
               <Phone :size="18" /><span><small>Phone</small>{{ personalInfo.socialLinks.phone }}</span>

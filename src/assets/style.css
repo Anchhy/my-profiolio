@@ -410,8 +410,10 @@ html.dark .nav-cta:hover { color: #090d18; }
 /* Project modal */
 .modal-backdrop { position: fixed; inset: 0; z-index: 90; display: grid; overflow-y: auto; place-items: center; padding: 1rem; background: rgb(6 9 22 / 0.75); backdrop-filter: blur(8px); }
 .project-modal { position: relative; width: min(100%, 49rem); max-height: calc(100vh - 2rem); overflow-y: auto; border: 1px solid var(--border); border-radius: 1.35rem; background: var(--surface); box-shadow: 0 30px 90px rgb(0 0 0 / 0.35); }
-.modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 2; display: flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; border: 1px solid rgb(255 255 255 / 0.18); border-radius: 0.7rem; background: rgb(0 0 0 / 0.12); color: white; cursor: pointer; }
-.modal-header { padding: 2.5rem 4rem 2.5rem 2rem; border-radius: 1.25rem 1.25rem 0 0; background: linear-gradient(135deg, #3843bd, #7353d6); color: white; }
+.modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 2; display: flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; border: 1px solid rgb(255 255 255 / 0.22); border-radius: 0.7rem; background: rgb(9 13 24 / 0.5); color: white; cursor: pointer; backdrop-filter: blur(8px); }
+.modal-preview { height: clamp(11rem, 45vw, 22rem); overflow: hidden; background: #0c0907; }
+.modal-preview img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.modal-header { padding: 2.5rem 4rem 2.5rem 2rem; background: linear-gradient(135deg, #3843bd, #7353d6); color: white; }
 .modal-header p { color: rgb(255 255 255 / 0.65); font-size: 0.65rem; font-weight: 850; letter-spacing: 0.13em; text-transform: uppercase; }
 .modal-header h2 { max-width: 35rem; margin-top: 0.65rem; font-size: clamp(1.8rem, 5vw, 3.2rem); font-weight: 850; letter-spacing: -0.05em; line-height: 1.02; }
 .modal-header span { display: block; margin-top: 1rem; color: rgb(255 255 255 / 0.68); font-size: 0.7rem; }
@@ -492,6 +494,7 @@ html.dark .nav-cta:hover { color: #090d18; }
   .experience-card { grid-template-columns: auto 1fr; padding: 2rem; }
   .experience-location { grid-column: 2; }
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-card-wide { grid-column: 1 / -1; }
   .modal-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .education-card { grid-template-columns: auto 1fr; padding: 2rem; }
   .education-meta { grid-column: 2; flex-direction: row; gap: 1.5rem; }
@@ -513,9 +516,9 @@ html.dark .nav-cta:hover { color: #090d18; }
   .section-shell { padding: 8rem 2rem; }
   .hero-scroll-cue { display: flex; }
   .skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .project-card-featured { grid-column: span 2; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); }
-  .project-card-featured .project-art { min-height: 23rem; }
-  .project-card-featured .project-body { padding: 2rem; }
+  .project-card-wide { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); }
+  .project-card-wide .project-art { display: grid; min-height: 23rem; align-content: center; }
+  .project-card-wide .project-body { padding: 2rem; }
   .contact-panel { grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.92fr); }
   .contact-intro { padding: 4rem; }
   .contact-form { margin: 1rem; padding: 2.2rem; }
@@ -555,7 +558,7 @@ html.dark .nav-cta:hover { color: #090d18; }
   .section-shell { padding: 1cm 0; }
   .reveal { opacity: 1 !important; transform: none !important; }
   .projects-grid, .skills-grid, .principles-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .project-card-featured { grid-column: auto; display: flex; }
+  .project-card-wide { grid-column: auto; display: flex; }
   .project-art { min-height: 8cm; }
   .project-card, .skill-card, .principle-card, .experience-card, .education-card { break-inside: avoid; box-shadow: none; }
   .contact-panel { display: block; background: white; color: #111; box-shadow: none; border: 1px solid #ddd; }

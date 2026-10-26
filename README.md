@@ -20,8 +20,8 @@ A modern, responsive personal portfolio website built with **Vue 3**, **Vite**, 
 - 🎯 **Scroll Spy Navigation** — Active section highlighting in navbar
 - 📈 **Reading Progress** — Subtle page-progress indicator in the navigation
 - ♿ **Accessible** — Semantic HTML, ARIA labels, focus management, and keyboard-friendly interactions
-- 🔍 **SEO and Sharing** — Route-aware metadata, structured data, canonical URLs, and a custom social card
-- 🧭 **Resilient Routing** — Branded 404 page and a static-host SPA fallback
+- 🔍 **SEO and Sharing** — Route-aware metadata, structured data, canonical URLs, sitemap, and a custom social card
+- 🧭 **Resilient Routing** — Pre-generated pages for every route, a branded 404 page, and a static-host SPA fallback
 
 ## 🗂️ Project Structure
 
@@ -30,7 +30,7 @@ src/
 ├── assets/style.css          # Tailwind import + design system
 ├── components/
 │   ├── NavBar.vue            # Sticky navbar + dark mode toggle
-│   ├── HeroSection.vue       # Hero + print résumé action
+│   ├── HeroSection.vue       # Hero + résumé download
 │   ├── AboutSection.vue      # About + working principles
 │   ├── ExperienceSection.vue # CCN internship experience
 │   ├── SkillsSection.vue     # Skill categories
@@ -48,7 +48,8 @@ src/
 ├── layouts/
 │   └── DefaultLayout.vue     # Main layout wrapper
 ├── router/
-│   └── index.ts              # Routes, smooth scroll, and page metadata
+│   ├── index.ts              # Routes, smooth scroll, and runtime metadata
+│   └── meta.ts               # Page titles/descriptions shared with the build
 ├── views/
 │   ├── HomeView.vue          # Main portfolio page
 │   ├── LearningHubView.vue   # Course catalog and filters
@@ -120,9 +121,15 @@ Or drag-and-drop the `dist/` folder at [app.netlify.com](https://app.netlify.com
 
 ### Static hosting and GitHub Pages
 
-`npm run build` creates the deployable `dist/` folder and copies the app shell to
-`dist/404.html`, so direct links such as `/learn/vue` work on static hosts. The
-custom domain is defined in `public/CNAME`; update that file if the domain changes.
+`npm run build` creates the deployable `dist/` folder. A small Vite plugin in
+`vite.config.ts` then writes a real HTML page for every route listed in
+`src/router/meta.ts` (for example `dist/learn/vue.html`), each with its own title,
+description, and canonical URL, so direct links return HTTP 200 on GitHub Pages and
+show the right preview when shared. It also writes `dist/404.html` and
+`dist/sitemap.xml`. When you add a route, add it to `staticRoutes` in `meta.ts`.
+
+The site deploys to GitHub Pages from `main` via `.github/workflows/deploy.yml`.
+The custom domain is defined in `public/CNAME`; update that file if the domain changes.
 
 ## 🛠️ Tech Stack
 

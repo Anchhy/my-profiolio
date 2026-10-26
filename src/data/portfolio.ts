@@ -1,7 +1,7 @@
 import ccnImage from '../assets/ccn.webp'
 import englishPathImage from '../assets/englishpath.webp'
 import flowStateImage from '../assets/flowstate.webp'
-import skillBridgeImage from '../assets/skillbridge-kh.png'
+import skillBridgeImage from '../assets/skillbridge-kh.webp'
 
 // ────────── Personal Info ──────────
 export interface PersonalInfo {
@@ -121,6 +121,7 @@ export interface Experience {
   techStack: string[]
   imageUrl?: string
   imageAlt?: string
+  imageCaption?: string
 }
 
 export const experience: Experience[] = [
@@ -134,6 +135,7 @@ export const experience: Experience[] = [
       'Contributing to a production-oriented nursing council platform with a focus on API reliability, authentication, authorization, and notification workflows.',
     imageUrl: ccnImage,
     imageAlt: 'Cambodian Council of Nurses web platform login interface',
+    imageCaption: 'CCN web platform',
     achievements: [
       'Developed and maintained NestJS REST APIs for login, OTP verification, password recovery, session validation, and role-based access.',
       'Improved personal and actionable-work notifications across workflow, CPD, and Presentation processes, including unread counts and read-state handling.',
@@ -300,6 +302,7 @@ export interface Education {
   field: string
   status: string
   years: string
+  location: string
   description: string
 }
 
@@ -310,6 +313,7 @@ export const education: Education[] = [
     field: 'Information & Communication Engineering',
     status: 'Fifth-Year Student',
     years: '2022 – Present',
+    location: 'Phnom Penh, Cambodia',
     description:
       'Completing an engineering curriculum spanning software development, networking, and system design, with a practical focus on full-stack web systems.',
   },

@@ -40,7 +40,7 @@ const { elementRef } = useScrollAnimation()
               loading="lazy"
               decoding="async"
             />
-            <figcaption>CCN web platform</figcaption>
+            <figcaption v-if="item.imageCaption">{{ item.imageCaption }}</figcaption>
           </figure>
 
           <ul class="experience-achievements">
